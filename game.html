@@ -33,6 +33,9 @@
             // Set FPS and have the updateAll function refresh according to that FPS
             var fps = 30;
             setInterval(updateAll,1000/fps);
+            
+            // Add event listener to get input from mouse movement
+            canvas.addEventListener("mousemove", updateMousePosition);
         }
 
         // This is the function for drawing to and updating the canvas
@@ -80,6 +83,14 @@
             canvasContext.beginPath();
             canvasContext.arc(centerX,centerY,radius,0,2*Math.PI, true);
             canvasContext.fill();
+        }
+        
+        // Method for getting mouse data that is called when the mouse is moved
+        function updateMousePosition(event){
+            // Get the mouse location
+            var mouseX = event.clientX;
+
+            paddleX = mouseX;
         }
     </script>
 </html>
