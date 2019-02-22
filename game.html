@@ -10,18 +10,20 @@
     </body>
     <script>
         var canvas, canvasContext;
-
-        // Set FPS and have the updateAll function refresh according to that FPS
-        var fps = 30;
-        setInterval(updateAll,1000/fps);
         
-        // This is the function for drawing to and updating the canvas
-        function updateAll() {
+        window.onload = function() {
             // Attach the HTML canvas to a variable
             canvas = document.getElementById("gameCanvas");
             // Get the graphics buffer for doing graphics
             canvasContext = canvas.getContext('2d');
             
+            // Set FPS and have the updateAll function refresh according to that FPS
+            var fps = 30;
+            setInterval(updateAll,1000/fps);
+        }
+
+        // This is the function for drawing to and updating the canvas
+        function updateAll() {
             // Draw a black rectangle on the canvas
             canvasContext.fillStyle = "black";
             canvasContext.fillRect(0,0,canvas.width,canvas.height);
