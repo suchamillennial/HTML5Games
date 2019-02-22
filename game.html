@@ -17,6 +17,12 @@
         ballY = 75;
         ballSpeedX = 5;
         ballSpeedY = 5;
+
+        // Add variables for paddle
+        const PADDLE_WIDTH = 100;
+        const PADDLE_THICKNESS = 10;
+        var paddleX = 400;
+
         
         window.onload = function() {
             // Attach the HTML canvas to a variable
@@ -57,6 +63,8 @@
             colorRect(0,0,canvas.width,canvas.height,"black");
             // Draw Ball
             colorCircle(ballX,ballY,10,"white");
+            // Draw the Paddle
+            colorRect(paddleX, 500, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
         }
         
         // Refactored method for drawing rectangle
