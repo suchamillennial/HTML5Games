@@ -31,6 +31,13 @@
 
         // This is the function for drawing to and updating the canvas
         function updateAll() {
+
+            moveAll();
+            drawAll();
+            
+        }
+
+        function moveAll() {
             // Update the ball's position
             ballX += ballSpeedX;
             ballY += ballSpeedY;
@@ -42,7 +49,9 @@
             if(ballY > canvas.height || ballY < 0){
                 ballSpeedY*=-1;
             }
+        }
 
+        drawAll(){
             // Draw a black rectangle on the canvas
             canvasContext.fillStyle = "black";
             canvasContext.fillRect(0,0,canvas.width,canvas.height);
