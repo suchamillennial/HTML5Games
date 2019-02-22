@@ -9,7 +9,11 @@
         <canvas id="gameCanvas" width="800" height="600"></canvas>
     </body>
     <script>
+        // Set up canvas variables
         var canvas, canvasContext;
+
+        // Set up game object variables
+        ballX = 75;
         
         window.onload = function() {
             // Attach the HTML canvas to a variable
@@ -24,6 +28,9 @@
 
         // This is the function for drawing to and updating the canvas
         function updateAll() {
+            // Update the ball's position
+            ballX++;
+
             // Draw a black rectangle on the canvas
             canvasContext.fillStyle = "black";
             canvasContext.fillRect(0,0,canvas.width,canvas.height);
@@ -31,7 +38,7 @@
             // Use Arc to draw a circle 
             canvasContext.fillStyle = "white";
             canvasContext.beginPath();
-            canvasContext.arc(100,100,10,0,2*Math.PI, true);
+            canvasContext.arc(ballX,100,10,0,2*Math.PI, true);
             canvasContext.fill();
         }
     </script>
