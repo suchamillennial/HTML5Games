@@ -21,6 +21,7 @@
         // Add variables for paddle
         const PADDLE_WIDTH = 100;
         const PADDLE_THICKNESS = 10;
+        const PADDLE_DIST_FROM_EDGE = 60;
         var paddleX = 400;
 
         
@@ -61,6 +62,15 @@
             if(ballY > canvas.height){
                 ballReset();
             }
+            
+            // Collision detection for paddle and ball this checks if the ball gets within the edges of the paddle
+            var paddleTopEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE;
+            var paddleBottomEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE + PADDLE_THICKNESS;
+            var paddleLeftEdgeX = paddleX;
+            var paddleRightEdgeX = paddleX + PADDLE_WIDTH;
+            if(ballY > paddleTopEdgeY && ballY < paddleBottomEdgeY && ballX > paddleLeftEdgeX && ballX < paddleRightEdgeX){
+                ballSpeedY *= -1;
+            }
         }
 
         function drawAll(){
@@ -70,7 +80,7 @@
             // Draw Ball
             colorCircle(ballX,ballY,10,"white");
             // Draw the Paddle
-            colorRect(paddleX, 500, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
+            colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
         }
         
         // Refactored method for drawing rectangle
