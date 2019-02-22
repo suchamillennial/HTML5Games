@@ -55,8 +55,11 @@
             if(ballX > canvas.width || ballX < 0){
                 ballSpeedX*=-1;
             }
-            if(ballY > canvas.height || ballY < 0){
+            if(ballY < 0){
                 ballSpeedY*=-1;
+            }
+            if(ballY > canvas.height){
+                ballReset();
             }
         }
 
@@ -96,6 +99,11 @@
             // var mouseY = event.clientY - rect.top - root.scrollTop;
 
             paddleX = mouseX;
+        }
+
+        function ballReset(){
+            ballX = 100;
+            ballY = 100;
         }
     </script>
 </html>
