@@ -14,6 +14,9 @@
 
         // Set up game object variables
         ballX = 75;
+        ballY = 75;
+        ballSpeedX = 5;
+        ballSpeedY = 5;
         
         window.onload = function() {
             // Attach the HTML canvas to a variable
@@ -29,7 +32,16 @@
         // This is the function for drawing to and updating the canvas
         function updateAll() {
             // Update the ball's position
-            ballX++;
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            // Reverse the ball if it hits the wall for X and Y positions
+            if(ballX > canvas.width || ballX < 0){
+                ballSpeedX*=-1;
+            }
+            if(ballY > canvas.height || ballY < 0){
+                ballSpeedY*=-1;
+            }
 
             // Draw a black rectangle on the canvas
             canvasContext.fillStyle = "black";
@@ -38,7 +50,7 @@
             // Use Arc to draw a circle 
             canvasContext.fillStyle = "white";
             canvasContext.beginPath();
-            canvasContext.arc(ballX,100,10,0,2*Math.PI, true);
+            canvasContext.arc(ballX,ballY,10,0,2*Math.PI, true);
             canvasContext.fill();
         }
     </script>
