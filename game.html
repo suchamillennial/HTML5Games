@@ -70,6 +70,13 @@
             var paddleRightEdgeX = paddleX + PADDLE_WIDTH;
             if(ballY > paddleTopEdgeY && ballY < paddleBottomEdgeY && ballX > paddleLeftEdgeX && ballX < paddleRightEdgeX){
                 ballSpeedY *= -1;
+                
+                // Add ball control
+                // Get distance of ball from center of paddle to determine the factor of ballSpeedX and then dilute with a scale factor
+                var centerOfPaddleX = paddleX + PADDLE_WIDTH/2;
+                var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
+                ballSpeedX = ballDistFromPaddleCenterX*.35;
+
             }
         }
 
