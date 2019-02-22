@@ -11,7 +11,12 @@
     <script>
         var canvas, canvasContext;
 
-        window.onload = function() {
+        // Set FPS and have the updateAll function refresh according to that FPS
+        var fps = 30;
+        setInterval(updateAll,1000/fps);
+        
+        // This is the function for drawing to and updating the canvas
+        function updateAll() {
             // Attach the HTML canvas to a variable
             canvas = document.getElementById("gameCanvas");
             // Get the graphics buffer for doing graphics
