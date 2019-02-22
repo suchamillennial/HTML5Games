@@ -51,16 +51,22 @@
             }
         }
 
-        drawAll(){
-            // Draw a black rectangle on the canvas
-            canvasContext.fillStyle = "black";
-            canvasContext.fillRect(0,0,canvas.width,canvas.height);
+        function drawAll(){
+            
+            // Draw Canvas
+            colorRect(0,0,canvas.width,canvas.height,"black");
 
             // Use Arc to draw a circle 
             canvasContext.fillStyle = "white";
             canvasContext.beginPath();
             canvasContext.arc(ballX,ballY,10,0,2*Math.PI, true);
             canvasContext.fill();
+        }
+        
+        // Refactored method for drawing rectangle
+        function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, boxColor){
+            canvasContext.fillStyle = boxColor;
+            canvasContext.fillRect(topLeftX,topLeftY,boxWidth,boxHeight);
         }
     </script>
 </html>
