@@ -87,8 +87,13 @@
         
         // Method for getting mouse data that is called when the mouse is moved
         function updateMousePosition(event){
-            // Get the mouse location
-            var mouseX = event.clientX;
+            // get position on page of canvas
+            var rect = canvas.getBoundingClientRect();
+            var root = document.documentElement;
+
+            // Get the mouse location - the document scrolling and bounding
+            var mouseX = event.clientX - rect.left - root.scrollLeft;
+            // var mouseY = event.clientY - rect.top - root.scrollTop;
 
             paddleX = mouseX;
         }
