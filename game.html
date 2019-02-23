@@ -22,6 +22,10 @@
         ballSpeedX = 5;
         ballSpeedY = 5;
 
+        const BRICK_W = 100;
+        const BRICK_H = 50;
+        const BRICK_COUNT = 4;
+
         // Add variables for paddle
         const PADDLE_WIDTH = 100;
         const PADDLE_THICKNESS = 10;
@@ -92,6 +96,8 @@
             colorCircle(ballX,ballY,10,"white");
             // Draw the Paddle
             colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
+            // Draw the bricks
+            drawBricks();
             // Draw the mouse coordinates
             colorText(mouseX+","+mouseY,mouseX,mouseY,"cyan");
         }
@@ -115,6 +121,10 @@
         function colorText(showWords,textX,textY,fillColor){
             canvasContext.fillStyle = fillColor;
             canvasContext.fillText(showWords,textX,textY);
+        }
+
+        function drawBricks(){
+            colorRect(0,0, BRICK_W, BRICK_H, "blue");
         }
 
         // Method for getting mouse data that is called when the mouse is moved
