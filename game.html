@@ -11,6 +11,10 @@
     <script>
         // Set up canvas variables
         var canvas, canvasContext;
+        
+        // Make mouse coordinates global
+        var mouseX = 10;
+        var mouseY = 10;
 
         // Set up game object variables
         ballX = 75;
@@ -88,6 +92,8 @@
             colorCircle(ballX,ballY,10,"white");
             // Draw the Paddle
             colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
+            // Draw the mouse coordinates
+            colorText(mouseX+","+mouseY,mouseX,mouseY,"cyan");
         }
         
         // Refactored method for drawing rectangle
@@ -105,6 +111,12 @@
             canvasContext.fill();
         }
         
+        // Create function for writing text
+        function colorText(showWords,textX,textY,fillColor){
+            canvasContext.fillStyle = fillColor;
+            canvasContext.fillText(showWords,textX,textY);
+        }
+
         // Method for getting mouse data that is called when the mouse is moved
         function updateMousePosition(event){
             // get position on page of canvas
@@ -112,8 +124,8 @@
             var root = document.documentElement;
 
             // Get the mouse location - the document scrolling and bounding
-            var mouseX = event.clientX - rect.left - root.scrollLeft;
-            // var mouseY = event.clientY - rect.top - root.scrollTop;
+            mouseX = event.clientX - rect.left - root.scrollLeft;
+            mouseY = event.clientY - rect.top - root.scrollTop;
 
             paddleX = mouseX;
         }
