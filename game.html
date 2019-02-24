@@ -25,6 +25,12 @@
         const BRICK_W = 100;
         const BRICK_H = 50;
         const BRICK_COUNT = 4;
+        var brick1 = true;
+        var brick2 = true;
+        var brick3 = true;
+        var brick4 = true;
+
+
 
         // Add variables for paddle
         const PADDLE_WIDTH = 100;
@@ -124,10 +130,18 @@
         }
 
         function drawBricks(){
-            colorRect(0,0, BRICK_W, BRICK_H, "blue");
-            colorRect(BRICK_W*1,0, BRICK_W-2, BRICK_H, "blue");
-            colorRect(BRICK_W*2,0, BRICK_W-2, BRICK_H, "blue");
-            colorRect(BRICK_W*3,0, BRICK_W-2, BRICK_H, "blue");
+            if(brick1){
+                colorRect(0,0, BRICK_W-2, BRICK_H, "blue");
+            }
+            if(brick2){
+                colorRect(BRICK_W*1,0, BRICK_W-2, BRICK_H, "blue");
+            }
+            if(brick3){
+                colorRect(BRICK_W*2,0, BRICK_W-2, BRICK_H, "blue");   
+            }
+            if(brick4){
+                colorRect(BRICK_W*3,0, BRICK_W-2, BRICK_H, "blue");    
+            }
             
         }
 
