@@ -36,8 +36,12 @@
 
         function brickReset(){
             for(let i =0;i<BRICK_COUNT; i++){
-                brickGrid[i] = true;
-            }
+                if(Math.random() < 0.5){
+                    brickGrid[i] = true;
+                }else{
+                    brickGrid[i] = false;
+                } // End of Rand check
+            } // End of for loop
         }
 
         window.onload = function() {
