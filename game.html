@@ -111,7 +111,9 @@
             // Draw the bricks
             drawBricks();
             // Draw the mouse coordinates
-            colorText(mouseX+","+mouseY,mouseX,mouseY,"cyan");
+            var mouseBrickCol = mouseX / BRICK_W;
+            var mouseBrickRow = mouseY / BRICK_H;
+            colorText(Math.floor(mouseBrickCol)+","+Math.floor(mouseBrickRow),mouseX,mouseY,"cyan");
         }
         
         // Refactored method for drawing rectangle
