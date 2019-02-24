@@ -24,6 +24,7 @@
 
         const BRICK_W = 100;
         const BRICK_H = 50;
+        const BRICK_GAP = 2;
         const BRICK_COUNT = 8;
         var brickGrid = new Array(BRICK_COUNT);
         brickReset();
@@ -137,7 +138,7 @@
         function drawBricks(){
             for(let i = 0; i < BRICK_COUNT; i++){
                 if(brickGrid[i]){
-                    colorRect(BRICK_W*i,0, BRICK_W-2, BRICK_H, "blue");
+                    colorRect(BRICK_W*i,0, BRICK_W-BRICK_GAP, BRICK_H, "blue");
                 }
             }
             
