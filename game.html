@@ -24,9 +24,9 @@
 
         const BRICK_W = 100;
         const BRICK_H = 50;
-        const BRICK_COUNT = 4;
-        var brickGrid = [true,true,false,true];
-
+        const BRICK_COUNT = 8;
+        var brickGrid = new Array(BRICK_COUNT);
+        brickReset();
 
         // Add variables for paddle
         const PADDLE_WIDTH = 100;
@@ -34,7 +34,12 @@
         const PADDLE_DIST_FROM_EDGE = 60;
         var paddleX = 400;
 
-        
+        function brickReset(){
+            for(let i =0;i<BRICK_COUNT; i++){
+                brickGrid[i] = true;
+            }
+        }
+
         window.onload = function() {
             // Attach the HTML canvas to a variable
             canvas = document.getElementById("gameCanvas");
