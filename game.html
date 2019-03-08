@@ -27,7 +27,7 @@
         const BRICK_GAP = 2;
         const BRICK_COLS = 8;
         const BRICK_ROWS = 3;
-        var brickGrid = new Array(BRICK_COLS);
+        var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
         brickReset();
 
         // Add variables for paddle
@@ -37,7 +37,7 @@
         var paddleX = 400;
 
         function brickReset(){
-            for(let i =0;i<BRICK_COLS; i++){
+            for(let i =0;i<BRICK_COLS*BRICK_ROWS; i++){
                 // if(Math.random() < 0.5){
                 //     brickGrid[i] = true;
                 // }else{
@@ -45,6 +45,7 @@
                 // } // End of Rand check
                 brickGrid[i] = true;
             } // End of for loop
+            brickGrid[5] = false;
         }
 
         window.onload = function() {
@@ -142,7 +143,10 @@
         function drawBricks(){
             for(let eachRow = 0; eachRow < BRICK_ROWS; eachRow++){
                 for(let eachCol = 0; eachCol < BRICK_COLS; eachCol++){
-                    if(brickGrid[eachCol]){
+
+                    var arrayIndex = BRICK_COLS * eachRow + eachCol;
+
+                    if(brickGrid[arrayIndex]){
                         colorRect(BRICK_W*eachCol,BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, "blue");
                     }
                 }
