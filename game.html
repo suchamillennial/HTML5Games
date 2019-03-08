@@ -26,6 +26,7 @@
         const BRICK_H = 50;
         const BRICK_GAP = 2;
         const BRICK_COUNT = 8;
+        const BRICK_ROWS = 3;
         var brickGrid = new Array(BRICK_COUNT);
         brickReset();
 
@@ -37,11 +38,12 @@
 
         function brickReset(){
             for(let i =0;i<BRICK_COUNT; i++){
-                if(Math.random() < 0.5){
-                    brickGrid[i] = true;
-                }else{
-                    brickGrid[i] = false;
-                } // End of Rand check
+                // if(Math.random() < 0.5){
+                //     brickGrid[i] = true;
+                // }else{
+                //     brickGrid[i] = false;
+                // } // End of Rand check
+                brickGrid[i] = true;
             } // End of for loop
         }
 
@@ -138,11 +140,18 @@
         }
 
         function drawBricks(){
-            for(let i = 0; i < BRICK_COUNT; i++){
-                if(brickGrid[i]){
-                    colorRect(BRICK_W*i,0, BRICK_W-BRICK_GAP, BRICK_H, "blue");
+            for(let eachRow = 0; eachRow < BRICK_ROWS; eachRow++){
+                for(let i = 0; i < BRICK_COUNT; i++){
+                    if(brickGrid[i]){
+                        colorRect(BRICK_W*i,BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, "blue");
+                    }
                 }
             }
+            // for(let i = 0; i < BRICK_COUNT; i++){
+            //     if(brickGrid[i]){
+            //         colorRect(BRICK_W*i,0, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, "blue");
+            //     }
+            // }
             
         }
 
