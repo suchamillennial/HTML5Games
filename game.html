@@ -112,9 +112,10 @@
             // Draw the bricks
             drawBricks();
             // Draw the mouse coordinates
-            var mouseBrickCol = mouseX / BRICK_W;
-            var mouseBrickRow = mouseY / BRICK_H;
-            colorText(Math.floor(mouseBrickCol)+","+Math.floor(mouseBrickRow),mouseX,mouseY,"cyan");
+            var mouseBrickCol = Math.floor(mouseX / BRICK_W);
+            var mouseBrickRow = Math.floor(mouseY / BRICK_H);
+            var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
+            colorText((mouseBrickCol)+","+(mouseBrickRow) +": "+ brickIndexUnderMouse,mouseX,mouseY,"cyan");
         }
         
         // Refactored method for drawing rectangle
@@ -137,12 +138,17 @@
             canvasContext.fillStyle = fillColor;
             canvasContext.fillText(showWords,textX,textY);
         }
+        
+        // This function calculates the index of a specific brick
+        function rowColToArrayIndex(col, row) {
+            return col + BRICK_COLS * row;
+        }
 
         function drawBricks(){
             for(let eachRow = 0; eachRow < BRICK_ROWS; eachRow++){
                 for(let eachCol = 0; eachCol < BRICK_COLS; eachCol++){
 
-                    var arrayIndex = BRICK_COLS * eachRow + eachCol;
+                    var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
 
                     if(brickGrid[arrayIndex]){
                         colorRect(BRICK_W*eachCol,BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, "blue");
