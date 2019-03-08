@@ -38,11 +38,7 @@
 
         function brickReset(){
             for(let i =0;i<BRICK_COLS*BRICK_ROWS; i++){
-                if(Math.random() < 0.5){
-                    brickGrid[i] = true;
-                }else{
-                    brickGrid[i] = false;
-                } // End of Rand check
+                brickGrid[i] = true;
             } // End of for loop
         }
 
@@ -116,6 +112,10 @@
             var mouseBrickRow = Math.floor(mouseY / BRICK_H);
             var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
             colorText((mouseBrickCol)+","+(mouseBrickRow) +": "+ brickIndexUnderMouse,mouseX,mouseY,"cyan");
+
+            if(brickIndexUnderMouse >= 0 && brickIndexUnderMouse < BRICK_COLS * BRICK_ROWS){
+                brickGrid[brickIndexUnderMouse] = false;
+            }
         }
         
         // Refactored method for drawing rectangle
