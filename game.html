@@ -22,11 +22,11 @@
         ballSpeedX = 5;
         ballSpeedY = 5;
 
-        const BRICK_W = 100;
-        const BRICK_H = 50;
+        const BRICK_W = 80;
+        const BRICK_H = 20;
         const BRICK_GAP = 2;
-        const BRICK_COLS = 8;
-        const BRICK_ROWS = 3;
+        const BRICK_COLS = 10;
+        const BRICK_ROWS = 14;
         var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
         brickReset();
 
@@ -38,14 +38,12 @@
 
         function brickReset(){
             for(let i =0;i<BRICK_COLS*BRICK_ROWS; i++){
-                // if(Math.random() < 0.5){
-                //     brickGrid[i] = true;
-                // }else{
-                //     brickGrid[i] = false;
-                // } // End of Rand check
-                brickGrid[i] = true;
+                if(Math.random() < 0.5){
+                    brickGrid[i] = true;
+                }else{
+                    brickGrid[i] = false;
+                } // End of Rand check
             } // End of for loop
-            brickGrid[5] = false;
         }
 
         window.onload = function() {
