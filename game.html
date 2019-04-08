@@ -80,6 +80,16 @@
                 ballReset();
             }
             
+            // Draw the ball coordinates
+            var ballBrickCol = Math.floor(ballX / BRICK_W);
+            var ballBrickRow = Math.floor(ballY / BRICK_H);
+            var brickIndexUnderball = rowColToArrayIndex(ballBrickCol, ballBrickRow);
+            // colorText((ballBrickCol)+","+(ballBrickRow) +": "+ brickIndexUnderball,ballX,ballY,"cyan");
+
+            if(brickIndexUnderball >= 0 && brickIndexUnderball < BRICK_COLS * BRICK_ROWS){
+                brickGrid[brickIndexUnderball] = false;
+            }
+
             // Collision detection for paddle and ball this checks if the ball gets within the edges of the paddle
             var paddleTopEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE;
             var paddleBottomEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE + PADDLE_THICKNESS;
@@ -107,15 +117,7 @@
             colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
             // Draw the bricks
             drawBricks();
-            // Draw the mouse coordinates
-            var mouseBrickCol = Math.floor(mouseX / BRICK_W);
-            var mouseBrickRow = Math.floor(mouseY / BRICK_H);
-            var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
-            colorText((mouseBrickCol)+","+(mouseBrickRow) +": "+ brickIndexUnderMouse,mouseX,mouseY,"cyan");
-
-            if(brickIndexUnderMouse >= 0 && brickIndexUnderMouse < BRICK_COLS * BRICK_ROWS){
-                brickGrid[brickIndexUnderMouse] = false;
-            }
+            
         }
         
         // Refactored method for drawing rectangle
