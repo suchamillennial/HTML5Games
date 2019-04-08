@@ -86,8 +86,13 @@
             var brickIndexUnderball = rowColToArrayIndex(ballBrickCol, ballBrickRow);
             // colorText((ballBrickCol)+","+(ballBrickRow) +": "+ brickIndexUnderball,ballX,ballY,"cyan");
 
-            if(brickIndexUnderball >= 0 && brickIndexUnderball < BRICK_COLS * BRICK_ROWS){
-                brickGrid[brickIndexUnderball] = false;
+            // if(brickIndexUnderball >= 0 && brickIndexUnderball < BRICK_COLS < BRICK_ROWS){
+            //     brickGrid[brickIndexUnderball] = false;
+            // }
+
+            if(ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
+                ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS){
+                 brickGrid[brickIndexUnderball] = false;
             }
 
             // Collision detection for paddle and ball this checks if the ball gets within the edges of the paddle
