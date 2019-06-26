@@ -107,12 +107,21 @@
 
                     // If the column changed you wanna bounce the ball horizontally
                     if(prevBrickCol != ballBrickCol){
-                        // flip horizontally
-                        ballSpeedX *= -1;
+                        // Get adjacent brick to see if it is an edge bounce
+                        var adjBrickSide = rowColToArrayIndex(prevBrickCol, ballBrickRow);
+                        if(brickGrid[adjBrickSide] == false){
+                            // If there is no brick adjacent then it is not blocking the bounce
+                            // flip horizontally
+                            ballSpeedX *= -1;
+                        }
                     }
                     if(prevBrickRow != ballBrickRow){
-                        // flip vertically
-                        ballSpeedY *= -1;
+                        // Get adjacent brick to see if it is an edge bounce
+                        var adjBrickTopBot = rowColToArrayIndex(ballBrickCol, prevBrickRow);
+                        if(brickGrid[adjBrickTopBot] == false){
+                            // flip vertically
+                            ballSpeedY *= -1;
+                        }
                     }
                 } // end of brick found
             } // end of valid col and row
@@ -219,6 +228,12 @@
             mouseY = event.clientY - rect.top - root.scrollTop;
 
             paddleX = mouseX;
+
+            //Cheat for testing ball in any position
+            ballX = mouseX;
+            ballY = mouseY;
+            ballSpeedX = 4;
+            ballSpeedY = -4;
         }
 
         function ballReset(){
