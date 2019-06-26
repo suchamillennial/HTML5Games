@@ -28,6 +28,7 @@
         const BRICK_COLS = 10;
         const BRICK_ROWS = 7; //temp for testing
         var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
+        var bricksLeft = 0;
 
         // Add variables for paddle
         const PADDLE_WIDTH = 100;
@@ -38,6 +39,7 @@
         function brickReset(){
             for(let i =0;i<BRICK_COLS*BRICK_ROWS; i++){
                 brickGrid[i] = true;
+                bricksLeft ++;
             } // End of for loop
         }
 
@@ -96,7 +98,9 @@
                 if(brickGrid[brickIndexUnderball]){
 
                     brickGrid[brickIndexUnderball] = false;
-                    
+                    bricksLeft--;
+                    console.log(bricksLeft);
+
                     // Calculate previous positions to determine the direction of the collision
                     var prevBallX = ballX - ballSpeedX;
                     var prevBallY = ballY - ballSpeedY;
@@ -238,10 +242,10 @@
             paddleX = mouseX;
 
             //Cheat for testing ball in any position
-            /*ballX = mouseX;
+            ballX = mouseX;
             ballY = mouseY;
             ballSpeedX = 4;
-            ballSpeedY = -4;*/
+            ballSpeedY = -4;
         }
 
         function ballReset(){
