@@ -105,6 +105,7 @@
                     var prevBrickCol = Math.floor(prevBallX / BRICK_W);
                     var prevBrickRow = Math.floor(prevBallY / BRICK_H);
 
+                    var bothTestsFailed = true;
                     // If the column changed you wanna bounce the ball horizontally
                     if(prevBrickCol != ballBrickCol){
                         // Get adjacent brick to see if it is an edge bounce
@@ -113,6 +114,7 @@
                             // If there is no brick adjacent then it is not blocking the bounce
                             // flip horizontally
                             ballSpeedX *= -1;
+                            bothTestsFailed = false;
                         }
                     }
                     if(prevBrickRow != ballBrickRow){
@@ -121,7 +123,13 @@
                         if(brickGrid[adjBrickTopBot] == false){
                             // flip vertically
                             ballSpeedY *= -1;
+                            bothTestsFailed = false;
                         }
+                    }
+                    // Case where we have hit an armpit case
+                    if(bothTestsFailed){
+                        ballSpeedX *= -1;
+                        ballSpeedY *= -1;
                     }
                 } // end of brick found
             } // end of valid col and row
