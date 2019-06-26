@@ -66,11 +66,11 @@
             
         }
 
-        function moveAll() {
+        function ballMove() {
             // Update the ball's position
             ballX += ballSpeedX;
             ballY += ballSpeedY;
-
+            
             // Reverse the ball if it hits the wall for X and Y positions
             if(ballX > canvas.width || ballX < 0){
                 ballSpeedX*=-1;
@@ -81,16 +81,14 @@
             if(ballY > canvas.height){
                 ballReset();
             }
-            
+        }
+        // We don't know if a collision happened so it is handling
+        function ballBrickHandling() {
+
             // Draw the ball coordinates
             var ballBrickCol = Math.floor(ballX / BRICK_W);
             var ballBrickRow = Math.floor(ballY / BRICK_H);
             var brickIndexUnderball = rowColToArrayIndex(ballBrickCol, ballBrickRow);
-            // colorText((ballBrickCol)+","+(ballBrickRow) +": "+ brickIndexUnderball,ballX,ballY,"cyan");
-
-            // if(brickIndexUnderball >= 0 && brickIndexUnderball < BRICK_COLS < BRICK_ROWS){
-            //     brickGrid[brickIndexUnderball] = false;
-            // }
 
             if(ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
                 ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS){
@@ -99,9 +97,11 @@
                     brickGrid[brickIndexUnderball] = false;
                     // reverse the direction of the ball
                     ballSpeedY *= -1;
-                }
-            }
+                } // end of brick found
+            } // end of valid col and row
+        }
 
+        function ballPaddleHandling(){
             // Collision detection for paddle and ball this checks if the ball gets within the edges of the paddle
             var paddleTopEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE;
             var paddleBottomEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE + PADDLE_THICKNESS;
@@ -117,6 +117,20 @@
                 ballSpeedX = ballDistFromPaddleCenterX*.35;
 
             }
+
+        }
+
+        function moveAll() {
+            ballMove();
+            ballBrickHandling();
+            ballPaddleHandling();
+            
+            // colorText((ballBrickCol)+","+(ballBrickRow) +": "+ brickIndexUnderball,ballX,ballY,"cyan");
+
+            // if(brickIndexUnderball >= 0 && brickIndexUnderball < BRICK_COLS < BRICK_ROWS){
+            //     brickGrid[brickIndexUnderball] = false;
+            // }
+
         }
 
         function drawAll(){
