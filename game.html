@@ -28,7 +28,6 @@
         const BRICK_COLS = 10;
         const BRICK_ROWS = 14;
         var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
-        brickReset();
 
         // Add variables for paddle
         const PADDLE_WIDTH = 100;
@@ -54,6 +53,9 @@
             
             // Add event listener to get input from mouse movement
             canvas.addEventListener("mousemove", updateMousePosition);
+
+            brickReset();
+            // ballReset();
         }
 
         // This is the function for drawing to and updating the canvas
