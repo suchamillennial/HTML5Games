@@ -23,10 +23,10 @@
         ballSpeedY = 5;
 
         const BRICK_W = 80;
-        const BRICK_H = 20;
+        const BRICK_H = 40; //temp for testin
         const BRICK_GAP = 2;
         const BRICK_COLS = 10;
-        const BRICK_ROWS = 14;
+        const BRICK_ROWS = 7; //temp for testing
         var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
 
         // Add variables for paddle
@@ -70,7 +70,7 @@
             // Update the ball's position
             ballX += ballSpeedX;
             ballY += ballSpeedY;
-            
+
             // Reverse the ball if it hits the wall for X and Y positions
             if(ballX > canvas.width || ballX < 0){
                 ballSpeedX*=-1;
@@ -94,9 +94,26 @@
                 ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS){
                 // Check if there is a brick that should even be removed
                 if(brickGrid[brickIndexUnderball]){
+
                     brickGrid[brickIndexUnderball] = false;
-                    // reverse the direction of the ball
-                    ballSpeedY *= -1;
+                    
+                    // Calculate previous positions to determine the direction of the collision
+                    var prevBallX = ballX - ballSpeedX;
+                    var prevBallY = ballY - ballSpeedY;
+
+                    // get previous column and row that the ball was in
+                    var prevBrickCol = Math.floor(prevBallX / BRICK_W);
+                    var prevBrickRow = Math.floor(prevBallY / BRICK_H);
+
+                    // If the column changed you wanna bounce the ball horizontally
+                    if(prevBrickCol != ballBrickCol){
+                        // flip horizontally
+                        ballSpeedX *= -1;
+                    }
+                    if(prevBrickRow != ballBrickRow){
+                        // flip vertically
+                        ballSpeedY *= -1;
+                    }
                 } // end of brick found
             } // end of valid col and row
         }
