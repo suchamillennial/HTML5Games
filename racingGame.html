@@ -241,8 +241,8 @@
                     if(trackGrid[arrayIndex]==2){
                         // Replace the car with a road
                         trackGrid[arrayIndex] = 0;
-                        ballX = (eachCol+1)*TRACK_W;
-                        ballY = (eachRow+1)*TRACK_H;
+                        ballX = (eachCol)*TRACK_W +(TRACK_W/2);
+                        ballY = (eachRow)*TRACK_H +(TRACK_H/2);
                     }
                 }
             }
