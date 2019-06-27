@@ -30,11 +30,6 @@
         var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
         var bricksLeft = 0;
 
-        // Add variables for paddle
-        const PADDLE_WIDTH = 100;
-        const PADDLE_THICKNESS = 10;
-        const PADDLE_DIST_FROM_EDGE = 60;
-        var paddleX = 400;
 
         function brickReset(){
             var i = 0;
@@ -156,33 +151,11 @@
             } // end of valid col and row
         }
 
-        function ballPaddleHandling(){
-            // Collision detection for paddle and ball this checks if the ball gets within the edges of the paddle
-            var paddleTopEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE;
-            var paddleBottomEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE + PADDLE_THICKNESS;
-            var paddleLeftEdgeX = paddleX;
-            var paddleRightEdgeX = paddleX + PADDLE_WIDTH;
-            if(ballY > paddleTopEdgeY && ballY < paddleBottomEdgeY && ballX > paddleLeftEdgeX && ballX < paddleRightEdgeX){
-                ballSpeedY *= -1;
-                
-                // Add ball control
-                // Get distance of ball from center of paddle to determine the factor of ballSpeedX and then dilute with a scale factor
-                var centerOfPaddleX = paddleX + PADDLE_WIDTH/2;
-                var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
-                ballSpeedX = ballDistFromPaddleCenterX*.35;
-
-                // if there are no more bricks then reset the bricks
-                if(bricksLeft == 0){
-                    brickReset();
-                    ballReset();
-                }
-            }
-        } // End of ballPaddleHandling()
+       
 
         function moveAll() {
             ballMove();
             ballBrickHandling();
-            ballPaddleHandling();
             
             // colorText((ballBrickCol)+","+(ballBrickRow) +": "+ brickIndexUnderball,ballX,ballY,"cyan");
 
@@ -198,8 +171,6 @@
             colorRect(0,0,canvas.width,canvas.height,"black");
             // Draw Ball
             colorCircle(ballX,ballY,10,"white");
-            // Draw the Paddle
-            colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
             // Draw the bricks
             drawBricks();
             
@@ -260,7 +231,6 @@
             mouseX = event.clientX - rect.left - root.scrollLeft;
             mouseY = event.clientY - rect.top - root.scrollTop;
 
-            paddleX = mouseX;
             // ballCheat();
             
         }
