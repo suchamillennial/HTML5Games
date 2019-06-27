@@ -78,10 +78,13 @@
             ballY += ballSpeedY;
 
             // Reverse the ball if it hits the wall for X and Y positions
-            if(ballX > canvas.width || ballX < 0){
+            if(ballX < 0 && ballSpeedX < 0.0){
                 ballSpeedX*=-1;
             }
-            if(ballY < 0){
+            if(ballX > canvas.width){
+                ballSpeedX*=-1;
+            }
+            if(ballY < 0 && ballSpeedY < 0.0){
                 ballSpeedY*=-1;
             }
             if(ballY > canvas.height){
