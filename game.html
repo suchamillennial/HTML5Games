@@ -17,9 +17,9 @@
         var mouseY = 10;
 
         // Set up game object variables
-        ballX = 75;
-        ballY = 75;
-        ballSpeedX = 5;
+        ballX = 400;
+        ballY = 400;
+        ballSpeedX = 0;
         ballSpeedY = 5;
 
         const BRICK_W = 80;
@@ -260,8 +260,10 @@
             ballSpeedY = -4;
         }
         function ballReset(){
-            ballX = 100;
-            ballY = 100;
+            ballX = 400;
+            ballY = 400;
+            ballSpeedX = 0;
+            ballSpeedY = 5;
         }
     </script>
 </html>
