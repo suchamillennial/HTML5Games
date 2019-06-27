@@ -16,11 +16,7 @@
         var mouseX = 10;
         var mouseY = 10;
 
-        // Set up game object variables
-        ballX = 400;
-        ballY = 400;
-        ballSpeedX = 0;
-        ballSpeedY = 5;
+        
 
         const TRACK_W = 40;
         const TRACK_H = 40; 
@@ -39,9 +35,17 @@
                         1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
                         1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
                         1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
-                        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+                        1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                         1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+
+        // Set up game object variables
+        ballX = 0;
+        ballY = 0;
+        ballSpeedX = 0;
+        ballSpeedY = 0;
+
+        ballReset();
 
         window.onload = function() {
             // Attach the HTML canvas to a variable
@@ -228,18 +232,20 @@
             
         }
 
-        function ballCheat(){
-            //Cheat for testing ball in any position
-            ballX = mouseX;
-            ballY = mouseY;
-            ballSpeedX = 4;
-            ballSpeedY = -4;
-        }
         function ballReset(){
-            ballX = 400;
-            ballY = 400;
-            ballSpeedX = 0;
-            ballSpeedY = 5;
+            for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
+                for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
+
+                    var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
+
+                    if(trackGrid[arrayIndex]==2){
+                        // Replace the car with a road
+                        trackGrid[arrayIndex] = 0;
+                        ballX = (eachCol+1)*TRACK_W;
+                        ballY = (eachRow+1)*TRACK_H;
+                    }
+                }
+            }
         }
     </script>
 </html>
