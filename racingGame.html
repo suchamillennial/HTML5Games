@@ -55,17 +55,13 @@
             
             // Add event listener to get input from mouse movement
             canvas.addEventListener("mousemove", updateMousePosition);
-
-            trackReset();
             // ballReset();
         }
 
         // This is the function for drawing to and updating the canvas
         function updateAll() {
-
             moveAll();
-            drawAll();
-            
+            drawAll();    
         }
 
         function ballMove() {
@@ -85,7 +81,6 @@
             }
             if(ballY > canvas.height){
                 ballReset();
-                trackReset();
             }
         }
 
@@ -115,8 +110,6 @@
                 if(isTrackAtColRow(ballTrackCol,ballTrackRow)){
 
                     trackGrid[trackIndexUnderball] = false;
-                    tracksLeft--;
-                    // console.log(tracksLeft);
 
                     // Calculate previous positions to determine the direction of the collision
                     var prevBallX = ballX - ballSpeedX;
