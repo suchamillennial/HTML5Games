@@ -244,14 +244,17 @@
             mouseY = event.clientY - rect.top - root.scrollTop;
 
             paddleX = mouseX;
+            // ballCheat();
+            
+        }
 
+        function ballCheat(){
             //Cheat for testing ball in any position
             ballX = mouseX;
             ballY = mouseY;
             ballSpeedX = 4;
             ballSpeedY = -4;
         }
-
         function ballReset(){
             ballX = 100;
             ballY = 100;
