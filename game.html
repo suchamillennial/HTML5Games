@@ -86,8 +86,22 @@
             }
             if(ballY > canvas.height){
                 ballReset();
+                brickReset();
             }
         }
+
+        // Helper function for getting data on bricks
+        function isBrickAtColRow(col, row){
+            if(col >= 0 && col < BRICK_COLS && row >= 0 && row < BRICK_ROWS){
+                
+            var brickIndexUnderCoord = rowColToArrayIndex(col, row);
+
+            return brickGrid[brickIndexUnderCoord];
+            }else{
+                return false;
+            }
+        }
+
         // We don't know if a collision happened so it is handling
         function ballBrickHandling() {
 
@@ -99,7 +113,7 @@
             if(ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
                 ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS){
                 // Check if there is a brick that should even be removed
-                if(brickGrid[brickIndexUnderball]){
+                if(isBrickAtColRow(ballBrickCol,ballBrickRow)){
 
                     brickGrid[brickIndexUnderball] = false;
                     bricksLeft--;
@@ -116,19 +130,15 @@
                     var bothTestsFailed = true;
                     // If the column changed you wanna bounce the ball horizontally
                     if(prevBrickCol != ballBrickCol){
-                        // Get adjacent brick to see if it is an edge bounce
-                        var adjBrickSide = rowColToArrayIndex(prevBrickCol, ballBrickRow);
-                        if(brickGrid[adjBrickSide] == false){
-                            // If there is no brick adjacent then it is not blocking the bounce
-                            // flip horizontally
+                       if(isBrickAtColRow(prevBrickCol, prevBrickRow) == false){
                             ballSpeedX *= -1;
-                            bothTestsFailed = false;
-                        }
+                            bothTestsFailed = false; 
+                       }
                     }
                     if(prevBrickRow != ballBrickRow){
                         // Get adjacent brick to see if it is an edge bounce
                         var adjBrickTopBot = rowColToArrayIndex(ballBrickCol, prevBrickRow);
-                        if(brickGrid[adjBrickTopBot] == false){
+                        if(isBrickAtColRow(prevBrickCol, prevBrickRow) == false){
                             // flip vertically
                             ballSpeedY *= -1;
                             bothTestsFailed = false;
