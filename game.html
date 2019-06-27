@@ -158,9 +158,13 @@
                 var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
                 ballSpeedX = ballDistFromPaddleCenterX*.35;
 
+                // if there are no more bricks then reset the bricks
+                if(bricksLeft == 0){
+                    brickReset();
+                    ballReset();
+                }
             }
-
-        }
+        } // End of ballPaddleHandling()
 
         function moveAll() {
             ballMove();
