@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    </head>
+    <body>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </body>
+    <script>
+        // Set up canvas variables
+        var canvas, canvasContext;
+        
+        // Make mouse coordinates global
+        var mouseX = 10;
+        var mouseY = 10;
+
+        // Set up game object variables
+        ballX = 400;
+        ballY = 400;
+        ballSpeedX = 0;
+        ballSpeedY = 5;
+
+        const BRICK_W = 80;
+        const BRICK_H = 20; 
+        const BRICK_GAP = 2;
+        const BRICK_COLS = 10;
+        const BRICK_ROWS = 14;
+        var brickGrid = new Array(BRICK_COLS*BRICK_ROWS);
+        var bricksLeft = 0;
+
+        // Add variables for paddle
+        const PADDLE_WIDTH = 100;
+        const PADDLE_THICKNESS = 10;
+        const PADDLE_DIST_FROM_EDGE = 60;
+        var paddleX = 400;
+
+        function brickReset(){
+            var i = 0;
+            for(; i <3*BRICK_COLS;i++){
+                brickGrid[i] = false;
+            }
+            for(;i<BRICK_COLS*BRICK_ROWS; i++){
+                brickGrid[i] = true;
+                bricksLeft ++;
+            } // End of for loop
+        }
+
+        window.onload = function() {
+            // Attach the HTML canvas to a variable
+            canvas = document.getElementById("gameCanvas");
+            // Get the graphics buffer for doing graphics
+            canvasContext = canvas.getContext('2d');
+            
+            // Set FPS and have the updateAll function refresh according to that FPS
+            var fps = 30;
+            setInterval(updateAll,1000/fps);
+            
+            // Add event listener to get input from mouse movement
+            canvas.addEventListener("mousemove", updateMousePosition);
+
+            brickReset();
+            // ballReset();
+        }
+
+        // This is the function for drawing to and updating the canvas
+        function updateAll() {
+
+            moveAll();
+            drawAll();
+            
+        }
+
+        function ballMove() {
+            // Update the ball's position
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            // Reverse the ball if it hits the wall for X and Y positions
+            if(ballX < 0 && ballSpeedX < 0.0){
+                ballSpeedX*=-1;
+            }
+            if(ballX > canvas.width){
+                ballSpeedX*=-1;
+            }
+            if(ballY < 0 && ballSpeedY < 0.0){
+                ballSpeedY*=-1;
+            }
+            if(ballY > canvas.height){
+                ballReset();
+                brickReset();
+            }
+        }
+
+        // Helper function for getting data on bricks
+        function isBrickAtColRow(col, row){
+            if(col >= 0 && col < BRICK_COLS && row >= 0 && row < BRICK_ROWS){
+                
+            var brickIndexUnderCoord = rowColToArrayIndex(col, row);
+
+            return brickGrid[brickIndexUnderCoord];
+            }else{
+                return false;
+            }
+        }
+
+        // We don't know if a collision happened so it is handling
+        function ballBrickHandling() {
+
+            // Draw the ball coordinates
+            var ballBrickCol = Math.floor(ballX / BRICK_W);
+            var ballBrickRow = Math.floor(ballY / BRICK_H);
+            var brickIndexUnderball = rowColToArrayIndex(ballBrickCol, ballBrickRow);
+
+            if(ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
+                ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS){
+                // Check if there is a brick that should even be removed
+                if(isBrickAtColRow(ballBrickCol,ballBrickRow)){
+
+                    brickGrid[brickIndexUnderball] = false;
+                    bricksLeft--;
+                    // console.log(bricksLeft);
+
+                    // Calculate previous positions to determine the direction of the collision
+                    var prevBallX = ballX - ballSpeedX;
+                    var prevBallY = ballY - ballSpeedY;
+
+                    // get previous column and row that the ball was in
+                    var prevBrickCol = Math.floor(prevBallX / BRICK_W);
+                    var prevBrickRow = Math.floor(prevBallY / BRICK_H);
+
+                    var bothTestsFailed = true;
+                    // If the column changed you wanna bounce the ball horizontally
+                    if(prevBrickCol != ballBrickCol){
+                       if(isBrickAtColRow(prevBrickCol, prevBrickRow) == false){
+                            ballSpeedX *= -1;
+                            bothTestsFailed = false; 
+                       }
+                    }
+                    if(prevBrickRow != ballBrickRow){
+                        // Get adjacent brick to see if it is an edge bounce
+                        var adjBrickTopBot = rowColToArrayIndex(ballBrickCol, prevBrickRow);
+                        if(isBrickAtColRow(prevBrickCol, prevBrickRow) == false){
+                            // flip vertically
+                            ballSpeedY *= -1;
+                            bothTestsFailed = false;
+                        }
+                    }
+                    // Case where we have hit an armpit case
+                    if(bothTestsFailed){
+                        ballSpeedX *= -1;
+                        ballSpeedY *= -1;
+                    }
+                } // end of brick found
+            } // end of valid col and row
+        }
+
+        function ballPaddleHandling(){
+            // Collision detection for paddle and ball this checks if the ball gets within the edges of the paddle
+            var paddleTopEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE;
+            var paddleBottomEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE + PADDLE_THICKNESS;
+            var paddleLeftEdgeX = paddleX;
+            var paddleRightEdgeX = paddleX + PADDLE_WIDTH;
+            if(ballY > paddleTopEdgeY && ballY < paddleBottomEdgeY && ballX > paddleLeftEdgeX && ballX < paddleRightEdgeX){
+                ballSpeedY *= -1;
+                
+                // Add ball control
+                // Get distance of ball from center of paddle to determine the factor of ballSpeedX and then dilute with a scale factor
+                var centerOfPaddleX = paddleX + PADDLE_WIDTH/2;
+                var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
+                ballSpeedX = ballDistFromPaddleCenterX*.35;
+
+                // if there are no more bricks then reset the bricks
+                if(bricksLeft == 0){
+                    brickReset();
+                    ballReset();
+                }
+            }
+        } // End of ballPaddleHandling()
+
+        function moveAll() {
+            ballMove();
+            ballBrickHandling();
+            ballPaddleHandling();
+            
+            // colorText((ballBrickCol)+","+(ballBrickRow) +": "+ brickIndexUnderball,ballX,ballY,"cyan");
+
+            // if(brickIndexUnderball >= 0 && brickIndexUnderball < BRICK_COLS < BRICK_ROWS){
+            //     brickGrid[brickIndexUnderball] = false;
+            // }
+
+        }
+
+        function drawAll(){
+            
+            // Draw Canvas
+            colorRect(0,0,canvas.width,canvas.height,"black");
+            // Draw Ball
+            colorCircle(ballX,ballY,10,"white");
+            // Draw the Paddle
+            colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, "red");
+            // Draw the bricks
+            drawBricks();
+            
+        }
+        
+        // Refactored method for drawing rectangle
+        function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, boxColor){
+            canvasContext.fillStyle = boxColor;
+            canvasContext.fillRect(topLeftX,topLeftY,boxWidth,boxHeight);
+        }
+        
+        // Refactored Method for drawing the ball
+        function colorCircle(centerX, centerY, radius, fillColor) {
+            // Use Arc to draw a circle 
+            canvasContext.fillStyle = fillColor;
+            canvasContext.beginPath();
+            canvasContext.arc(centerX,centerY,radius,0,2*Math.PI, true);
+            canvasContext.fill();
+        }
+        
+        // Create function for writing text
+        function colorText(showWords,textX,textY,fillColor){
+            canvasContext.fillStyle = fillColor;
+            canvasContext.fillText(showWords,textX,textY);
+        }
+        
+        // This function calculates the index of a specific brick
+        function rowColToArrayIndex(col, row) {
+            return col + BRICK_COLS * row;
+        }
+
+        function drawBricks(){
+            for(let eachRow = 0; eachRow < BRICK_ROWS; eachRow++){
+                for(let eachCol = 0; eachCol < BRICK_COLS; eachCol++){
+
+                    var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
+
+                    if(brickGrid[arrayIndex]){
+                        colorRect(BRICK_W*eachCol,BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, "blue");
+                    }
+                }
+            }
+            // for(let i = 0; i < BRICK_COUNT; i++){
+            //     if(brickGrid[i]){
+            //         colorRect(BRICK_W*i,0, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, "blue");
+            //     }
+            // }
+            
+        }
+
+        // Method for getting mouse data that is called when the mouse is moved
+        function updateMousePosition(event){
+            // get position on page of canvas
+            var rect = canvas.getBoundingClientRect();
+            var root = document.documentElement;
+
+            // Get the mouse location - the document scrolling and bounding
+            mouseX = event.clientX - rect.left - root.scrollLeft;
+            mouseY = event.clientY - rect.top - root.scrollTop;
+
+            paddleX = mouseX;
+            // ballCheat();
+            
+        }
+
+        function ballCheat(){
+            //Cheat for testing ball in any position
+            ballX = mouseX;
+            ballY = mouseY;
+            ballSpeedX = 4;
+            ballSpeedY = -4;
+        }
+        function ballReset(){
+            ballX = 400;
+            ballY = 400;
+            ballSpeedX = 0;
+            ballSpeedY = 5;
+        }
+    </script>
+</html>
