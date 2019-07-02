@@ -44,11 +44,12 @@
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
         // Set up game object variables
-        carX = 0;
-        carY = 0;
-        carAng = 0;
-        carSpeedX = 0;
-        carSpeedY = 0;
+        var carX = 0;
+        var carY = 0;
+        var carAng = 0;
+        var carSpeed = 5;
+        var carSpeedX = 0;
+        var carSpeedY = 0;
 
         carReset();
 
@@ -80,24 +81,15 @@
         }
 
         function carMove() {
-            // Update the car's position
-            // carX += carSpeedX;
-            // carY += carSpeedY;
-            carAng += 0.02;
+            carSpeedX = Math.cos(carAng)*carSpeed;
+            carSpeedY = Math.sin(carAng)*carSpeed;
+            console.log(carSpeed);
+            console.log(carSpeedX);
+            console.log(carSpeedY);
+            //carAng += 0.02;
 
-            // Reverse the car if it hits the wall for X and Y positions
-            if(carX < 0 && carSpeedX < 0.0){
-                carSpeedX*=-1;
-            }
-            if(carX > canvas.width){
-                carSpeedX*=-1;
-            }
-            if(carY < 0 && carSpeedY < 0.0){
-                carSpeedY*=-1;
-            }
-            if(carY > canvas.height){
-                carReset();
-            }
+            carX += carSpeedX;
+            carY += carSpeedY;
         }
 
         // Helper function for getting data on tracks
@@ -124,38 +116,8 @@
                 carTrackRow >= 0 && carTrackRow < TRACK_ROWS){
                 // Check if there is a track that should even be removed
                 if(isTrackAtColRow(carTrackCol,carTrackRow)){
-
-
-                    // Calculate previous positions to determine the direction of the collision
-                    var prevCarX = carX - carSpeedX;
-                    var prevCarY = carY - carSpeedY;
-
-                    // get previous column and row that the car was in
-                    var prevTrackCol = Math.floor(prevCarX / TRACK_W);
-                    var prevTrackRow = Math.floor(prevCarY / TRACK_H);
-
-                    var bothTestsFailed = true;
-                    // If the column changed you wanna bounce the car horizontally
-                    if(prevTrackCol != carTrackCol){
-                       if(isTrackAtColRow(prevTrackCol, prevTrackRow) == false){
-                            carSpeedX *= -1;
-                            bothTestsFailed = false; 
-                       }
-                    }
-                    if(prevTrackRow != carTrackRow){
-                        // Get adjacent track to see if it is an edge bounce
-                        var adjTrackTopBot = rowColToArrayIndex(carTrackCol, prevTrackRow);
-                        if(isTrackAtColRow(prevTrackCol, prevTrackRow) == false){
-                            // flip vertically
-                            carSpeedY *= -1;
-                            bothTestsFailed = false;
-                        }
-                    }
-                    // Case where we have hit an armpit case
-                    if(bothTestsFailed){
-                        carSpeedX *= -1;
-                        carSpeedY *= -1;
-                    }
+                    console.log("colide");
+                    carSpeed *= -1;
                 } // end of TRACK found
             } // end of valid col and row
         }
