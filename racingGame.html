@@ -12,6 +12,10 @@
         // Set up canvas variables
         var canvas, canvasContext;
         
+        var carPic = document.createElement("img");
+        // Image loading is async so we need a bool to show if it is loaded
+        var carPicLoaded = false;
+
         // Make mouse coordinates global
         var mouseX = 10;
         var mouseY = 10;
@@ -59,6 +63,12 @@
             
             // Add event listener to get input from mouse movement
             canvas.addEventListener("mousemove", updateMousePosition);
+            
+            // Set carPicLoaded bool to true when it is loaded
+            carPic.onload = function() {
+                carPicLoaded = true;
+            }
+            carPic.src = "player1car.png";
             // ballReset();
         }
 
@@ -167,7 +177,12 @@
             // Draw Canvas
             colorRect(0,0,canvas.width,canvas.height,"black");
             // Draw Ball
-            colorCircle(ballX,ballY,10,"red");
+            // colorCircle(ballX,ballY,10,"red");
+
+            // If the carpic is loaded then draw it
+            if(carPicLoaded){
+                canvasContext.drawImage(carPic,ballX-carPic.width/2, ballY - carPic.height/2);
+            }
             // Draw the tracks
             drawTracks();
             
