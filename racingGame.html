@@ -46,6 +46,7 @@
         // Set up game object variables
         carX = 0;
         carY = 0;
+        carAng = 0;
         carSpeedX = 0;
         carSpeedY = 0;
 
@@ -80,8 +81,9 @@
 
         function carMove() {
             // Update the car's position
-            carX += carSpeedX;
-            carY += carSpeedY;
+            // carX += carSpeedX;
+            // carY += carSpeedY;
+            carAng += 0.02;
 
             // Reverse the car if it hits the wall for X and Y positions
             if(carX < 0 && carSpeedX < 0.0){
