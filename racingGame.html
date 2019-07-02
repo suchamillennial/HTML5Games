@@ -183,13 +183,26 @@
 
             // If the carpic is loaded then draw it
             if(carPicLoaded){
-                canvasContext.drawImage(carPic,carX-carPic.width/2, carY - carPic.height/2);
+                drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
             }
             // Draw the tracks
             drawTracks();
             
         }
         
+        function drawBitmapCenteredWithRotation(useBitmap, atX, atY, withAng){
+            // Save the canvas properties
+            canvasContext.save();
+            // Moves car to the top (0,0)
+            canvasContext.translate(atX, atY);
+            // rotates car arount its center
+            canvasContext.rotate(withAng);
+            // move and draw the bitmap back at its correct location
+            canvasContext.drawImage(useBitmap, -useBitmap.width/2, -useBitmap.height/2);
+            // restore the canvas settings for working on the next images
+            canvasContext.restore();
+        }
+
         // Refactored method for drawing rectangle
         function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, boxColor){
             canvasContext.fillStyle = boxColor;
