@@ -44,12 +44,12 @@
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
         // Set up game object variables
-        ballX = 0;
-        ballY = 0;
-        ballSpeedX = 0;
-        ballSpeedY = 0;
+        carX = 0;
+        carY = 0;
+        carSpeedX = 0;
+        carSpeedY = 0;
 
-        ballReset();
+        carReset();
 
         window.onload = function() {
             // Attach the HTML canvas to a variable
@@ -69,7 +69,7 @@
                 carPicLoaded = true;
             }
             carPic.src = "player1car.png";
-            // ballReset();
+            // carReset();
         }
 
         // This is the function for drawing to and updating the canvas
@@ -78,23 +78,23 @@
             drawAll();    
         }
 
-        function ballMove() {
-            // Update the ball's position
-            ballX += ballSpeedX;
-            ballY += ballSpeedY;
+        function carMove() {
+            // Update the car's position
+            carX += carSpeedX;
+            carY += carSpeedY;
 
-            // Reverse the ball if it hits the wall for X and Y positions
-            if(ballX < 0 && ballSpeedX < 0.0){
-                ballSpeedX*=-1;
+            // Reverse the car if it hits the wall for X and Y positions
+            if(carX < 0 && carSpeedX < 0.0){
+                carSpeedX*=-1;
             }
-            if(ballX > canvas.width){
-                ballSpeedX*=-1;
+            if(carX > canvas.width){
+                carSpeedX*=-1;
             }
-            if(ballY < 0 && ballSpeedY < 0.0){
-                ballSpeedY*=-1;
+            if(carY < 0 && carSpeedY < 0.0){
+                carSpeedY*=-1;
             }
-            if(ballY > canvas.height){
-                ballReset();
+            if(carY > canvas.height){
+                carReset();
             }
         }
 
@@ -111,48 +111,48 @@
         }
 
         // We don't know if a collision happened so it is handling
-        function ballTrackHandling() {
+        function carTrackHandling() {
 
-            // Draw the ball coordinates
-            var ballTrackCol = Math.floor(ballX / TRACK_W);
-            var ballTrackRow = Math.floor(ballY / TRACK_H);
-            var trackIndexUnderball = rowColToArrayIndex(ballTrackCol, ballTrackRow);
+            // Draw the car coordinates
+            var carTrackCol = Math.floor(carX / TRACK_W);
+            var carTrackRow = Math.floor(carY / TRACK_H);
+            var trackIndexUndercar = rowColToArrayIndex(carTrackCol, carTrackRow);
 
-            if(ballTrackCol >= 0 && ballTrackCol < TRACK_COLS &&
-                ballTrackRow >= 0 && ballTrackRow < TRACK_ROWS){
+            if(carTrackCol >= 0 && carTrackCol < TRACK_COLS &&
+                carTrackRow >= 0 && carTrackRow < TRACK_ROWS){
                 // Check if there is a track that should even be removed
-                if(isTrackAtColRow(ballTrackCol,ballTrackRow)){
+                if(isTrackAtColRow(carTrackCol,carTrackRow)){
 
 
                     // Calculate previous positions to determine the direction of the collision
-                    var prevBallX = ballX - ballSpeedX;
-                    var prevBallY = ballY - ballSpeedY;
+                    var prevCarX = carX - carSpeedX;
+                    var prevCarY = carY - carSpeedY;
 
-                    // get previous column and row that the ball was in
-                    var prevTrackCol = Math.floor(prevBallX / TRACK_W);
-                    var prevTrackRow = Math.floor(prevBallY / TRACK_H);
+                    // get previous column and row that the car was in
+                    var prevTrackCol = Math.floor(prevCarX / TRACK_W);
+                    var prevTrackRow = Math.floor(prevCarY / TRACK_H);
 
                     var bothTestsFailed = true;
-                    // If the column changed you wanna bounce the ball horizontally
-                    if(prevTrackCol != ballTrackCol){
+                    // If the column changed you wanna bounce the car horizontally
+                    if(prevTrackCol != carTrackCol){
                        if(isTrackAtColRow(prevTrackCol, prevTrackRow) == false){
-                            ballSpeedX *= -1;
+                            carSpeedX *= -1;
                             bothTestsFailed = false; 
                        }
                     }
-                    if(prevTrackRow != ballTrackRow){
+                    if(prevTrackRow != carTrackRow){
                         // Get adjacent track to see if it is an edge bounce
-                        var adjTrackTopBot = rowColToArrayIndex(ballTrackCol, prevTrackRow);
+                        var adjTrackTopBot = rowColToArrayIndex(carTrackCol, prevTrackRow);
                         if(isTrackAtColRow(prevTrackCol, prevTrackRow) == false){
                             // flip vertically
-                            ballSpeedY *= -1;
+                            carSpeedY *= -1;
                             bothTestsFailed = false;
                         }
                     }
                     // Case where we have hit an armpit case
                     if(bothTestsFailed){
-                        ballSpeedX *= -1;
-                        ballSpeedY *= -1;
+                        carSpeedX *= -1;
+                        carSpeedY *= -1;
                     }
                 } // end of TRACK found
             } // end of valid col and row
@@ -161,13 +161,13 @@
        
 
         function moveAll() {
-            ballMove();
-            ballTrackHandling();
+            carMove();
+            carTrackHandling();
             
-            // colorText((ballTRACKCol)+","+(ballTRACKRow) +": "+ trackIndexUnderball,ballX,ballY,"cyan");
+            // colorText((carTRACKCol)+","+(carTRACKRow) +": "+ trackIndexUndercar,carX,carY,"cyan");
 
-            // if(trackIndexUnderball >= 0 && trackIndexUnderball < TRACK_COLS < TRACK_ROWS){
-            //     trackGrid[trackIndexUnderball] = false;
+            // if(trackIndexUndercar >= 0 && trackIndexUndercar < TRACK_COLS < TRACK_ROWS){
+            //     trackGrid[trackIndexUndercar] = false;
             // }
 
         }
@@ -176,12 +176,12 @@
             
             // Draw Canvas
             colorRect(0,0,canvas.width,canvas.height,"black");
-            // Draw Ball
-            // colorCircle(ballX,ballY,10,"red");
+            // Draw Car
+            // colorCircle(carX,carY,10,"red");
 
             // If the carpic is loaded then draw it
             if(carPicLoaded){
-                canvasContext.drawImage(carPic,ballX-carPic.width/2, ballY - carPic.height/2);
+                canvasContext.drawImage(carPic,carX-carPic.width/2, carY - carPic.height/2);
             }
             // Draw the tracks
             drawTracks();
@@ -194,7 +194,7 @@
             canvasContext.fillRect(topLeftX,topLeftY,boxWidth,boxHeight);
         }
         
-        // Refactored Method for drawing the ball
+        // Refactored Method for drawing the car
         function colorCircle(centerX, centerY, radius, fillColor) {
             // Use Arc to draw a circle 
             canvasContext.fillStyle = fillColor;
@@ -244,11 +244,11 @@
             mouseX = event.clientX - rect.left - root.scrollLeft;
             mouseY = event.clientY - rect.top - root.scrollTop;
 
-            // ballCheat();
+            // carCheat();
             
         }
 
-        function ballReset(){
+        function carReset(){
             for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
                 for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
 
@@ -257,8 +257,8 @@
                     if(trackGrid[arrayIndex]==2){
                         // Replace the car with a road
                         trackGrid[arrayIndex] = 0;
-                        ballX = (eachCol)*TRACK_W +(TRACK_W/2);
-                        ballY = (eachRow)*TRACK_H +(TRACK_H/2);
+                        carX = (eachCol)*TRACK_W +(TRACK_W/2);
+                        carY = (eachRow)*TRACK_H +(TRACK_H/2);
                     }
                 }
             }
