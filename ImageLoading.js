@@ -3,10 +3,11 @@ var roadPic = document.createElement("img");
 var wallPic = document.createElement("img");
 
 // Instead of individual bools to check if pics are loaded we will keep a counter to check all pics
-var picsToLoad;
+var picsToLoad= 3;
 
 function countLoadedImagesAndLaunchIfReady() {
     picsToLoad--;
+    console.log(picsToLoad);
     if(picsToLoad == 0){
         imageLoadingDoneSoStartGame();
     }
