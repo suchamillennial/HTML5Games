@@ -15,6 +15,17 @@ var keyHeld_Right = false;
 var mouseX = 10;
 var mouseY = 10;
 
+function setupInput() {
+    // Add event listener to get input from mouse movement
+    canvas.addEventListener("mousemove", updateMousePosition);
+            
+    // Add keyboard input on the document because the keyboard needs to be on the page not the canvas
+    // Add event listener for pressing and releasing
+    document.addEventListener("keydown", keyPressed);
+    document.addEventListener("keyup", keyReleased);
+
+}
+
 function keyPressed(evt){
     // Print which key was pressed
     // console.log("Key Pressed: " + evt.keyCode);

@@ -16,14 +16,8 @@
             var fps = 30;
             setInterval(updateAll,1000/fps);
             
-            // Add event listener to get input from mouse movement
-            canvas.addEventListener("mousemove", updateMousePosition);
+            setupInput();
             
-            // Add keyboard input on the document because the keyboard needs to be on the page not the canvas
-            // Add event listener for pressing and releasing
-            document.addEventListener("keydown", keyPressed);
-            document.addEventListener("keyup", keyReleased);
-
             // Set carPicLoaded bool to true when it is loaded
             carPic.onload = function() {
                 carPicLoaded = true;
