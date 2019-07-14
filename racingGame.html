@@ -18,6 +18,12 @@
         const KEY_UP_ARROW = 38;
         const KEY_DOWN_ARROW = 40;
 
+        // variable to see if the key is being held down
+        var keyHeld_Gas = false;
+        var keyHeld_Reverse = false;
+        var keyHeld_Left = false;
+        var keyHeld_Right = false;
+
         var carPic = document.createElement("img");
         // Image loading is async so we need a bool to show if it is loaded
         var carPicLoaded = false;
@@ -64,16 +70,16 @@
             // console.log("Key Pressed: " + evt.keyCode);
             switch(evt.keyCode){
                 case KEY_LEFT_ARROW: 
-                    carAng -= 0.5;
+                    keyHeld_Left = true;
                     break;
                 case KEY_RIGHT_ARROW: 
-                    carAng += 0.5;
+                    keyHeld_Right = true;
                     break;
                 case KEY_UP_ARROW: 
-                    carSpeed += 0.5;
+                    keyHeld_Gas = true;
                     break;
                 case KEY_DOWN_ARROW: 
-                    carSpeed -= 0.5;
+                    keyHeld_Reverse = true;
                     break;
             }
         }
@@ -81,6 +87,20 @@
         function keyReleased(evt){
             // Print which key was pressed
             // console.log("Key Released: " + evt.keyCode);
+            switch(evt.keyCode){
+                case KEY_LEFT_ARROW: 
+                    keyHeld_Left = false;
+                    break;
+                case KEY_RIGHT_ARROW: 
+                    keyHeld_Right = false;
+                    break;
+                case KEY_UP_ARROW: 
+                    keyHeld_Gas = false;
+                    break;
+                case KEY_DOWN_ARROW: 
+                    keyHeld_Reverse = false;
+                    break;
+            }
         }
 
         window.onload = function() {
@@ -116,6 +136,19 @@
         }
 
         function carMove() {
+            
+            if(keyHeld_Gas){
+                carSpeed += 0.1;
+            }
+            if(keyHeld_Reverse){
+                carSpeed -= 0.1;
+            }
+            if(keyHeld_Right){
+                carAng += 0.1;
+            }
+            if(keyHeld_Left){
+                carAng -= 0.1;
+            }
             carSpeedX = Math.cos(carAng)*carSpeed;
             carSpeedY = Math.sin(carAng)*carSpeed;
             // console.log(carSpeed);
