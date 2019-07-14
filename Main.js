@@ -36,19 +36,13 @@
             carMove();
             carTrackHandling();
         }
-        function drawAll(){
-            
-            // Draw Canvas
-            colorRect(0,0,canvas.width,canvas.height,"black");
-            // Draw Car
-            // colorCircle(carX,carY,10,"red");
 
-            // If the carpic is loaded then draw it
-            if(carPicLoaded){
-                // console.log("car drawn");
-                drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
-            }
-            // Draw the tracks
+        function clearScreen() {
+            colorRect(0,0,canvas.width,canvas.height,"black");
+        }
+        function drawAll(){
+            clearScreen();
+            drawCar();
             drawTracks();
             
         }
