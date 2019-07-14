@@ -53,6 +53,16 @@
 
         carReset();
 
+        function keyPressed(evt){
+            // Print which key was pressed
+            console.log("Key Pressed: " + evt.keyCode);
+        }
+
+        function keyReleased(evt){
+            // Print which key was pressed
+            console.log("Key Released: " + evt.keyCode);
+        }
+
         window.onload = function() {
             // Attach the HTML canvas to a variable
             canvas = document.getElementById("gameCanvas");
