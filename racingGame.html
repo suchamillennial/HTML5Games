@@ -107,7 +107,7 @@
             // console.log(carSpeed);
             // console.log(carSpeedX);
             // console.log(carSpeedY);
-            carAng += 0.02;
+            // carAng += 0.02;
 
             carX += carSpeedX;
             carY += carSpeedY;
@@ -138,7 +138,7 @@
                 // Check if there is a track that should even be removed
                 if(isTrackAtColRow(carTrackCol,carTrackRow)){
                     // console.log("colide");
-                    carSpeed *= -1;
+                    carSpeed = 0;
                 } // end of TRACK found
             } // end of valid col and row
         }
