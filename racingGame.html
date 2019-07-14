@@ -121,7 +121,7 @@
                 carTrackRow >= 0 && carTrackRow < TRACK_ROWS){
                 // Check if there is a track that should even be removed
                 if(isTrackAtColRow(carTrackCol,carTrackRow)){
-                    console.log("colide");
+                    // console.log("colide");
                     carSpeed *= -1;
                 } // end of TRACK found
             } // end of valid col and row
@@ -150,7 +150,7 @@
 
             // If the carpic is loaded then draw it
             if(carPicLoaded){
-                console.log("car drawn");
+                // console.log("car drawn");
                 drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
             }
             // Draw the tracks
