@@ -2,104 +2,9 @@
         // Set up canvas variables
         var canvas, canvasContext;
         
-        // Const key codes
-        const KEY_LEFT_ARROW = 37;
-        const KEY_RIGHT_ARROW = 39;
-        const KEY_UP_ARROW = 38;
-        const KEY_DOWN_ARROW = 40;
-
-        // variable to see if the key is being held down
-        var keyHeld_Gas = false;
-        var keyHeld_Reverse = false;
-        var keyHeld_Left = false;
-        var keyHeld_Right = false;
-
-        var carPic = document.createElement("img");
-        // Image loading is async so we need a bool to show if it is loaded
-        var carPicLoaded = false;
-
-        // Make mouse coordinates global
-        var mouseX = 10;
-        var mouseY = 10;
-
-        // Set up game object variables
-        var carX = 0;
-        var carY = 0;
-        var carAng = 0;
-        var carSpeed = 5;
-        var carSpeedX = 0;
-        var carSpeedY = 0;
-        
-        const GROUNDSPEED_DECAY_MULT = 0.98;
-        const DRIVE_POWER = 0.5;
-        const REVERSE_POWER = 0.2;
-        const TURN_RATE = .1;
-
-        const TRACK_W = 40;
-        const TRACK_H = 40; 
-        const TRACK_GAP = 2;
-        const TRACK_COLS = 20;
-        const TRACK_ROWS = 15;
-        var trackGrid= [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-                        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-                        1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                        1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
-                        1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-                        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-                        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-
-        const TRACK_ROAD = 0;
-        const TRACK_WALL = 1;
-        const TRACK_PLAYERSTART = 2;
-        
-
         carReset();
 
-        function keyPressed(evt){
-            // Print which key was pressed
-            // console.log("Key Pressed: " + evt.keyCode);
-            switch(evt.keyCode){
-                case KEY_LEFT_ARROW: 
-                    keyHeld_Left = true;
-                    break;
-                case KEY_RIGHT_ARROW: 
-                    keyHeld_Right = true;
-                    break;
-                case KEY_UP_ARROW: 
-                    keyHeld_Gas = true;
-                    break;
-                case KEY_DOWN_ARROW: 
-                    keyHeld_Reverse = true;
-                    break;
-            }
-        }
-
-        function keyReleased(evt){
-            // Print which key was pressed
-            // console.log("Key Released: " + evt.keyCode);
-            switch(evt.keyCode){
-                case KEY_LEFT_ARROW: 
-                    keyHeld_Left = false;
-                    break;
-                case KEY_RIGHT_ARROW: 
-                    keyHeld_Right = false;
-                    break;
-                case KEY_UP_ARROW: 
-                    keyHeld_Gas = false;
-                    break;
-                case KEY_DOWN_ARROW: 
-                    keyHeld_Reverse = false;
-                    break;
-            }
-        }
+        
 
         window.onload = function() {
             // Attach the HTML canvas to a variable
@@ -252,19 +157,7 @@
             
         }
 
-        // Method for getting mouse data that is called when the mouse is moved
-        function updateMousePosition(event){
-            // get position on page of canvas
-            var rect = canvas.getBoundingClientRect();
-            var root = document.documentElement;
-
-            // Get the mouse location - the document scrolling and bounding
-            mouseX = event.clientX - rect.left - root.scrollLeft;
-            mouseY = event.clientY - rect.top - root.scrollTop;
-
-            // carCheat();
-            
-        }
+        
 
         function carReset(){
             for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
