@@ -309,6 +309,8 @@
                     if(trackGrid[arrayIndex]==2){
                         // Replace the car with a road
                         trackGrid[arrayIndex] = 0;
+                        // Get the radians since 1 radian is 180 degrees
+                        carAng = 0 * Math.PI/180.0;
                         carX = (eachCol)*TRACK_W +(TRACK_W/2);
                         carY = (eachRow)*TRACK_H +(TRACK_H/2);
                     }
