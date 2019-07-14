@@ -12,13 +12,19 @@
             // Get the graphics buffer for doing graphics
             canvasContext = canvas.getContext('2d');
             
+            // Load Images before everything else
+            loadImages();
+
+        }
+
+        // This is a dumbass name
+        function imageLoadingDoneSoStartGame() {
             // Set FPS and have the updateAll function refresh according to that FPS
             var fps = 30;
             setInterval(updateAll,1000/fps);
             
             setupInput();
 
-            loadImages();
 
             carReset();
         }
