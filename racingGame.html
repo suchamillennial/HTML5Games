@@ -61,12 +61,26 @@
 
         function keyPressed(evt){
             // Print which key was pressed
-            console.log("Key Pressed: " + evt.keyCode);
+            // console.log("Key Pressed: " + evt.keyCode);
+            switch(evt.keyCode){
+                case KEY_LEFT_ARROW: 
+                    carAng -= 0.5;
+                    break;
+                case KEY_RIGHT_ARROW: 
+                    carAng += 0.5;
+                    break;
+                case KEY_UP_ARROW: 
+                    carSpeed += 0.5;
+                    break;
+                case KEY_DOWN_ARROW: 
+                    carSpeed -= 0.5;
+                    break;
+            }
         }
 
         function keyReleased(evt){
             // Print which key was pressed
-            console.log("Key Released: " + evt.keyCode);
+            // console.log("Key Released: " + evt.keyCode);
         }
 
         window.onload = function() {
