@@ -12,6 +12,9 @@
             // Get the graphics buffer for doing graphics
             canvasContext = canvas.getContext('2d');
             
+            // Add loading screen
+            colorRect(0, 0, canvas.width, canvas.height, 'red');
+            colorText("LOADING...", canvas.width/2, canvas.height/2, 'black');
             // Load Images before everything else
             loadImages();
 
@@ -28,6 +31,7 @@
 
             carReset();
         }
+
 
         // This is the function for drawing to and updating the canvas
         function updateAll() {
