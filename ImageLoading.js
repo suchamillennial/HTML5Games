@@ -1,22 +1,25 @@
 var carPic = document.createElement("img");
-// Image loading is async so we need a bool to show if it is loaded
-var carPicLoaded = false;
-
 var roadPic = document.createElement("img");
 var wallPic = document.createElement("img");
 
-var roadPicLoaded = false;
-var wallPicLoaded = false;
+// Instead of individual bools to check if pics are loaded we will keep a counter to check all pics
+var picsToLoad;
+
+function countLoadedImagesAndLaunchIfReady() {
+    picsToLoad--;
+    if(picsToLoad == 0){
+        imageLoadingDoneSoStartGame();
+    }
+}
 
 function carImageLoad() {
-    // Set carPicLoaded bool to true when it is loaded
-    carPic.onload = function() {
-        carPicLoaded = true;
-    }
+    carPic.onload = countLoadedImagesAndLaunchIfReady;
     carPic.src = "player1car.png";
 }
 
 function trackLoadImages() {
+    roadPic.onload = countLoadedImagesAndLaunchIfReady;
+    wallPic.onload = countLoadedImagesAndLaunchIfReady;
 
     roadPic.src = "track_road.png";
     wallPic.src = "track_wall.png";
