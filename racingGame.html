@@ -32,7 +32,18 @@
         var mouseX = 10;
         var mouseY = 10;
 
+        // Set up game object variables
+        var carX = 0;
+        var carY = 0;
+        var carAng = 0;
+        var carSpeed = 5;
+        var carSpeedX = 0;
+        var carSpeedY = 0;
         
+        const GROUNDSPEED_DECAY_MULT = 0.98;
+        const DRIVE_POWER = 0.5;
+        const REVERSE_POWER = 0.2;
+        const TURN_RATE = .1;
 
         const TRACK_W = 40;
         const TRACK_H = 40; 
@@ -55,13 +66,7 @@
                         1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
-        // Set up game object variables
-        var carX = 0;
-        var carY = 0;
-        var carAng = 0;
-        var carSpeed = 5;
-        var carSpeedX = 0;
-        var carSpeedY = 0;
+        
 
         carReset();
 
@@ -138,19 +143,19 @@
         function carMove() {
             
             // Degrade speed each frame
-            carSpeed*= 0.98;
+            carSpeed*= GROUNDSPEED_DECAY_MULT;
 
             if(keyHeld_Gas){
-                carSpeed += 0.2;
+                carSpeed += DRIVE_POWER;
             }
             if(keyHeld_Reverse){
-                carSpeed -= 0.2;
+                carSpeed -= REVERSE_POWER;
             }
             if(keyHeld_Right){
-                carAng += 0.1;
+                carAng += TURN_RATE;
             }
             if(keyHeld_Left){
-                carAng -= 0.1;
+                carAng -= TURN_RATE;
             }
             carSpeedX = Math.cos(carAng)*carSpeed;
             carSpeedY = Math.sin(carAng)*carSpeed;
