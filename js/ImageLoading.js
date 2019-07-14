@@ -16,14 +16,14 @@ function countLoadedImagesAndLaunchIfReady() {
 // Generic helper function
 function beginLoadingImage(imgVar, fileName) {
     imgVar.onload = countLoadedImagesAndLaunchIfReady;
-    imgVar.src = fileName;
+    imgVar.src = "images/" + fileName;
 }
 
 function loadImages() {
     var imageList = [
-        {varName: carPic, fileName: "images/player1car.png"},
-        {varName: roadPic, fileName: "images/track_road.png"},
-        {varName: wallPic, fileName: "images/track_wall.png"}
+        {varName: carPic, fileName: "player1car.png"},
+        {varName: roadPic, fileName: "track_road.png"},
+        {varName: wallPic, fileName: "track_wall.png"}
     ];
 
     // Set the number of Images
