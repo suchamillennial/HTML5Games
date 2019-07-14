@@ -172,7 +172,7 @@
         }
 
         // Helper function for getting data on tracks
-        function isTrackAtColRow(col, row){
+        function isWallAtColRow(col, row){
             if(col >= 0 && col < TRACK_COLS && row >= 0 && row < TRACK_ROWS){
                 
             var trackIndexUnderCoord = rowColToArrayIndex(col, row);
@@ -194,7 +194,7 @@
             if(carTrackCol >= 0 && carTrackCol < TRACK_COLS &&
                 carTrackRow >= 0 && carTrackRow < TRACK_ROWS){
                 // Check if there is a track that should even be removed
-                if(isTrackAtColRow(carTrackCol,carTrackRow)){
+                if(isWallAtColRow(carTrackCol,carTrackRow)){
                     // console.log("colide");
                     // Go backwards by the speed in order to not get stuck in the wall
                     carX -= Math.cos(carAng)*carSpeed;
