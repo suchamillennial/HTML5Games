@@ -18,12 +18,9 @@
             
             setupInput();
             
-            // Set carPicLoaded bool to true when it is loaded
-            carPic.onload = function() {
-                carPicLoaded = true;
-            }
-            carPic.src = "player1car.png";
-            // carReset();
+            carImageLoad();
+
+            carReset();
         }
 
         // This is the function for drawing to and updating the canvas
