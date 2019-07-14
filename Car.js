@@ -62,9 +62,5 @@ function carMove() {
 }
 
 function drawCar() {
-    // If the carpic is loaded then draw it
-    if(carPicLoaded){
-        // console.log("car drawn");
         drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
-    }
 }
