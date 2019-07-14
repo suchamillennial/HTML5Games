@@ -18,6 +18,7 @@
             
             setupInput();
             
+            trackLoadImages();
             carImageLoad();
 
             carReset();
@@ -39,8 +40,8 @@
         }
         function drawAll(){
             clearScreen();
-            drawCar();
             drawTracks();
+            drawCar();
             
         }
         
