@@ -1,8 +1,4 @@
-var roadPic = document.createElement("img");
-var wallPic = document.createElement("img");
 
-var roadPicLoaded = false;
-var wallPicLoaded = false;
 
 const TRACK_W = 40;
 const TRACK_H = 40; 
@@ -29,11 +25,7 @@ const TRACK_ROAD = 0;
 const TRACK_WALL = 1;
 const TRACK_PLAYERSTART = 2;
 
-function trackLoadImages() {
 
-    roadPic.src = "track_road.png";
-    wallPic.src = "track_wall.png";
-}
 
 // Helper function for getting data on tracks
 function isWallAtColRow(col, row){

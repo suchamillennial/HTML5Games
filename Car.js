@@ -1,6 +1,4 @@
-var carPic = document.createElement("img");
-// Image loading is async so we need a bool to show if it is loaded
-var carPicLoaded = false;
+
 
 // Set up game object variables
 var carX = 0;
@@ -15,13 +13,7 @@ const DRIVE_POWER = 0.5;
 const REVERSE_POWER = 0.2;
 const TURN_RATE = .1;
 
-function carImageLoad() {
-    // Set carPicLoaded bool to true when it is loaded
-    carPic.onload = function() {
-        carPicLoaded = true;
-    }
-    carPic.src = "player1car.png";
-}
+
 
 function carReset(){
     for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
