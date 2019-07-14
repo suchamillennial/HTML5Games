@@ -66,6 +66,9 @@
                         1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
+        const TRACK_ROAD = 0;
+        const TRACK_WALL = 1;
+        const TRACK_PLAYERSTART = 2;
         
 
         carReset();
@@ -174,7 +177,7 @@
                 
             var trackIndexUnderCoord = rowColToArrayIndex(col, row);
 
-            return trackGrid[trackIndexUnderCoord] == 1;
+            return trackGrid[trackIndexUnderCoord] == TRACK_WALL;
             }else{
                 return false;
             }
@@ -311,9 +314,9 @@
 
                     var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
 
-                    if(trackGrid[arrayIndex]==2){
+                    if(trackGrid[arrayIndex]==TRACK_PLAYERSTART){
                         // Replace the car with a road
-                        trackGrid[arrayIndex] = 0;
+                        trackGrid[arrayIndex] = TRACK_ROAD;
                         // Get the radians since 1 radian is 180 degrees
                         carAng = 0 * Math.PI/180.0;
                         carX = (eachCol)*TRACK_W +(TRACK_W/2);
