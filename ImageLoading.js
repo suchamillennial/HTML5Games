@@ -13,6 +13,12 @@ function countLoadedImagesAndLaunchIfReady() {
     }
 }
 
+// Generic helper function
+function beginLoadingImage(imgVar, fileName) {
+    imgVar.onload = countLoadedImagesAndLaunchIfReady;
+    imgVar.src = fileName;
+}
+
 function carImageLoad() {
     carPic.onload = countLoadedImagesAndLaunchIfReady;
     carPic.src = "player1car.png";
