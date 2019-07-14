@@ -20,7 +20,17 @@ function beginLoadingImage(imgVar, fileName) {
 }
 
 function loadImages() {
-    beginLoadingImage(carPic, "player1car.png");
-    beginLoadingImage(roadPic, "track_road.png");
-    beginLoadingImage(wallPic, "track_wall.png");
+    var imageList = [
+        {varName: carPic, fileName: "player1car.png"},
+        {varName: roadPic, fileName: "track_road.png"},
+        {varName: wallPic, fileName: "track_wall.png"}
+    ];
+
+    // Set the number of Images
+    picsToLoad = imageList.length;
+
+    // Loop through images and call helper function
+    for(var i = 0; i < imageList.length; i++){
+        beginLoadingImage(imageList[i].varName, imageList[i].fileName);
+    }
 }
