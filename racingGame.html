@@ -185,6 +185,9 @@
                 // Check if there is a track that should even be removed
                 if(isTrackAtColRow(carTrackCol,carTrackRow)){
                     // console.log("colide");
+                    // Go backwards by the speed in order to not get stuck in the wall
+                    carX -= Math.cos(carAng)*carSpeed;
+                    carY -= Math.sin(carAng)*carSpeed;
                     carSpeed *= -0.5;
                 } // end of TRACK found
             } // end of valid col and row
