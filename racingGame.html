@@ -137,11 +137,14 @@
 
         function carMove() {
             
+            // Degrade speed each frame
+            carSpeed*= 0.98;
+
             if(keyHeld_Gas){
-                carSpeed += 0.1;
+                carSpeed += 0.2;
             }
             if(keyHeld_Reverse){
-                carSpeed -= 0.1;
+                carSpeed -= 0.2;
             }
             if(keyHeld_Right){
                 carAng += 0.1;
