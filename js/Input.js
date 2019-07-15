@@ -22,42 +22,30 @@ function setupInput() {
 
 }
 
-function keyPressed(evt){
-    // Print which key was pressed
-    // console.log("Key Pressed: " + evt.keyCode);
+function keySet (setTo) {
+
     switch(evt.keyCode){
         case KEY_LEFT_ARROW: 
-            keyHeld_Left = true;
+            keyHeld_Left = setTo;
             break;
         case KEY_RIGHT_ARROW: 
-            keyHeld_Right = true;
+            keyHeld_Right = setTo;
             break;
         case KEY_UP_ARROW: 
-            keyHeld_Gas = true;
+            keyHeld_Gas = setTo;
             break;
         case KEY_DOWN_ARROW: 
-            keyHeld_Reverse = true;
+            keyHeld_Reverse = setTo;
             break;
     }
 }
 
+function keyPressed(evt){
+    keySet(true);
+}
+
 function keyReleased(evt){
-    // Print which key was pressed
-    // console.log("Key Released: " + evt.keyCode);
-    switch(evt.keyCode){
-        case KEY_LEFT_ARROW: 
-            keyHeld_Left = false;
-            break;
-        case KEY_RIGHT_ARROW: 
-            keyHeld_Right = false;
-            break;
-        case KEY_UP_ARROW: 
-            keyHeld_Gas = false;
-            break;
-        case KEY_DOWN_ARROW: 
-            keyHeld_Reverse = false;
-            break;
-    }
+    keySet(false);
 }
 
 // Method for getting mouse data that is called when the mouse is moved
