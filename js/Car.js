@@ -22,6 +22,20 @@ function carClass() {
     this.keyHeld_Left = false;
     this.keyHeld_Right = false;
 
+    // Store information for what the control keys for the car are
+    this.controlKeyUp;
+    this.controlKeyDown;
+    this.controlKeyLeft;
+    this.controlKeyRight;
+
+    this.setupInput = function(upKey, downKey, leftKey, rightKey) {
+        
+        this.controlKeyUp = upKey;
+        this.controlKeyDown = downKey;
+        this.controlKeyLeft = leftKey;
+        this.controlKeyRight = rightKey;
+    }
+
     this.reset = function(whichImage) {
         this.myCarPic = whichImage;
 
