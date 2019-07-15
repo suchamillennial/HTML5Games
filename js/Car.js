@@ -31,42 +31,45 @@ function carClass() {
             }
         }
     } // End of carReset();
-}
 
-
-
-
-
-function carMove() {
+    this.carMove = function() {
             
-    // Degrade speed each frame
-    carSpeed*= GROUNDSPEED_DECAY_MULT;
-
-    if(keyHeld_Gas){
-        carSpeed += DRIVE_POWER;
-    }
-    if(keyHeld_Reverse){
-        carSpeed -= REVERSE_POWER;
-    }
-    if(Math.abs(carSpeed) > 0.5){
-        if(keyHeld_Right){
-            carAng += TURN_RATE;
+        // Degrade speed each frame
+        carSpeed*= GROUNDSPEED_DECAY_MULT;
+    
+        if(keyHeld_Gas){
+            carSpeed += DRIVE_POWER;
         }
-        if(keyHeld_Left){
-            carAng -= TURN_RATE;
+        if(keyHeld_Reverse){
+            carSpeed -= REVERSE_POWER;
         }
-    }
-    carSpeedX = Math.cos(carAng)*carSpeed;
-    carSpeedY = Math.sin(carAng)*carSpeed;
-    // console.log(carSpeed);
-    // console.log(carSpeedX);
-    // console.log(carSpeedY);
-    // carAng += 0.02;
+        if(Math.abs(carSpeed) > 0.5){
+            if(keyHeld_Right){
+                carAng += TURN_RATE;
+            }
+            if(keyHeld_Left){
+                carAng -= TURN_RATE;
+            }
+        }
+        carSpeedX = Math.cos(carAng)*carSpeed;
+        carSpeedY = Math.sin(carAng)*carSpeed;
+        // console.log(carSpeed);
+        // console.log(carSpeedX);
+        // console.log(carSpeedY);
+        // carAng += 0.02;
+    
+        carX += carSpeedX;
+        carY += carSpeedY;
+    } // End of carMove
 
-    carX += carSpeedX;
-    carY += carSpeedY;
-}
-
-function drawCar() {
+    this.drawCar = function() {
         drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
+    }
 }
+
+
+
+
+
+
+
