@@ -15,8 +15,8 @@ var trackGrid= [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
                 1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
                 1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,
-                1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
+                1,0,0,1,0,0,0,0,0,0,4,4,4,0,0,1,0,0,0,1,
+                5,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,
                 1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
@@ -24,6 +24,9 @@ var trackGrid= [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 const TRACK_ROAD = 0;
 const TRACK_WALL = 1;
 const TRACK_PLAYERSTART = 2;
+const TRACK_FINISH = 3;
+const TRACK_TREE = 4;
+const TRACK_FLAG = 5;
 
 
 
@@ -76,6 +79,15 @@ function drawTracks(){
                 canvasContext.drawImage(roadPic,TRACK_W*eachCol, TRACK_H*eachRow);
             }else if(trackGrid[arrayIndex]==TRACK_WALL){
                 canvasContext.drawImage(wallPic,TRACK_W*eachCol, TRACK_H*eachRow);
+            }else if(trackGrid[arrayIndex]==TRACK_FINISH) {
+                canvasContext.drawImage(finishPic,TRACK_W*eachCol, TRACK_H*eachRow);
+
+            }else if(trackGrid[arrayIndex]==TRACK_TREE) {
+                canvasContext.drawImage(treePic,TRACK_W*eachCol, TRACK_H*eachRow);
+                
+            }else if(trackGrid[arrayIndex]==TRACK_FLAG) {
+                canvasContext.drawImage(flagPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                
             }
         }
     }
