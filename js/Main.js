@@ -38,6 +38,7 @@ function imageLoadingDoneSoStartGame() {
     blueCar.reset(carPic);
     blueCar.setupInput(38, 40, 37, 39);
     greenCar.reset(otherCarPic);
+    greenCar.setupInput(87, 83, 65, 68);
 }
 
 
