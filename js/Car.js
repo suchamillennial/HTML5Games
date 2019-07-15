@@ -14,7 +14,7 @@ function carClass() {
     this.speedX = 0;
     this.speedY = 0;
 
-    this.carReset = function() {
+    this.reset = function() {
         for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
             for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
     
@@ -32,7 +32,7 @@ function carClass() {
         }
     } // End of carReset();
 
-    this.carMove = function() {
+    this.move = function() {
             
         // Degrade speed each frame
         carSpeed*= GROUNDSPEED_DECAY_MULT;
@@ -62,7 +62,7 @@ function carClass() {
         carY += carSpeedY;
     } // End of carMove
 
-    this.drawCar = function() {
+    this.draw = function() {
         drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
     }
 }
