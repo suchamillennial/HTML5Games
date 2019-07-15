@@ -75,19 +75,26 @@ function drawTracks(){
 
             var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
 
-            if(trackGrid[arrayIndex]==TRACK_ROAD){
-                canvasContext.drawImage(roadPic,TRACK_W*eachCol, TRACK_H*eachRow);
-            }else if(trackGrid[arrayIndex]==TRACK_WALL){
-                canvasContext.drawImage(wallPic,TRACK_W*eachCol, TRACK_H*eachRow);
-            }else if(trackGrid[arrayIndex]==TRACK_FINISH) {
-                canvasContext.drawImage(finishPic,TRACK_W*eachCol, TRACK_H*eachRow);
-
-            }else if(trackGrid[arrayIndex]==TRACK_TREE) {
-                canvasContext.drawImage(treePic,TRACK_W*eachCol, TRACK_H*eachRow);
+            var tileKind = trackGrid[arrayIndex];
+            switch(tileKind){
+                case TRACK_ROAD:
+                    canvasContext.drawImage(roadPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    break;
+                case TRACK_WALL:
+                    canvasContext.drawImage(wallPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    break;
                 
-            }else if(trackGrid[arrayIndex]==TRACK_FLAG) {
-                canvasContext.drawImage(flagPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                case TRACK_FLAG:
+                    canvasContext.drawImage(flagPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    break;
                 
+                case TRACK_FINISH:
+                    canvasContext.drawImage(finishPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    break;
+                
+                case TRACK_TREE:
+                    canvasContext.drawImage(treePic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    break;
             }
         }
     }
