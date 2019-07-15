@@ -13,27 +13,29 @@ function carClass() {
     this.speed = 5;
     this.speedX = 0;
     this.speedY = 0;
-}
 
-
-
-function carReset(){
-    for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
-        for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
-
-            var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
-
-            if(trackGrid[arrayIndex]==TRACK_PLAYERSTART){
-                // Replace the car with a road
-                trackGrid[arrayIndex] = TRACK_ROAD;
-                // Get the radians since 1 radian is 180 degrees
-                carAng = 0 * Math.PI/180.0;
-                carX = (eachCol)*TRACK_W +(TRACK_W/2);
-                carY = (eachRow)*TRACK_H +(TRACK_H/2);
+    this.carReset = function() {
+        for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
+            for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
+    
+                var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
+    
+                if(trackGrid[arrayIndex]==TRACK_PLAYERSTART){
+                    // Replace the car with a road
+                    trackGrid[arrayIndex] = TRACK_ROAD;
+                    // Get the radians since 1 radian is 180 degrees
+                    carAng = 0 * Math.PI/180.0;
+                    carX = (eachCol)*TRACK_W +(TRACK_W/2);
+                    carY = (eachRow)*TRACK_H +(TRACK_H/2);
+                }
             }
         }
-    }
+    } // End of carReset();
 }
+
+
+
+
 
 function carMove() {
             
