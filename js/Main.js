@@ -5,8 +5,10 @@ var canvas, canvasContext;
 // Create instance of car for player 1
 
 var blueCar = new carClass();
+var greenCar = new carClass();
 
 blueCar.reset();
+greenCar.reset();
 
 
 
@@ -34,6 +36,7 @@ function imageLoadingDoneSoStartGame() {
 
 
     blueCar.reset();
+    greenCar.reset();
 }
 
 
@@ -45,7 +48,9 @@ function updateAll() {
 
 function moveAll() {
     blueCar.move();
+    greenCar.move();
     carTrackHandling(blueCar);
+    carTrackHandling(greenCar);
 }
 
 function clearScreen() {
@@ -55,6 +60,7 @@ function clearScreen() {
 function drawAll(){
     drawTracks();
     blueCar.draw();
+    greenCar.draw();
     
 }
 
