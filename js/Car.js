@@ -24,9 +24,9 @@ function carClass() {
                     // Replace the car with a road
                     trackGrid[arrayIndex] = TRACK_ROAD;
                     // Get the radians since 1 radian is 180 degrees
-                    carAng = 0 * Math.PI/180.0;
-                    carX = (eachCol)*TRACK_W +(TRACK_W/2);
-                    carY = (eachRow)*TRACK_H +(TRACK_H/2);
+                    this.ang = 0 * Math.PI/180.0;
+                    this.x = (eachCol)*TRACK_W +(TRACK_W/2);
+                    this.y = (eachRow)*TRACK_H +(TRACK_H/2);
                 }
             }
         }
@@ -35,35 +35,35 @@ function carClass() {
     this.move = function() {
             
         // Degrade speed each frame
-        carSpeed*= GROUNDSPEED_DECAY_MULT;
+        this.speed*= GROUNDSPEED_DECAY_MULT;
     
         if(keyHeld_Gas){
-            carSpeed += DRIVE_POWER;
+            this.speed += DRIVE_POWER;
         }
         if(keyHeld_Reverse){
-            carSpeed -= REVERSE_POWER;
+            this.speed -= REVERSE_POWER;
         }
-        if(Math.abs(carSpeed) > 0.5){
+        if(Math.abs(this.speed) > 0.5){
             if(keyHeld_Right){
-                carAng += TURN_RATE;
+                this.ang += TURN_RATE;
             }
             if(keyHeld_Left){
-                carAng -= TURN_RATE;
+                this.ang -= TURN_RATE;
             }
         }
-        carSpeedX = Math.cos(carAng)*carSpeed;
-        carSpeedY = Math.sin(carAng)*carSpeed;
+        this.speedX = Math.cos(this.ang)*this.speed;
+        this.speedY = Math.sin(this.ang)*this.speed;
         // console.log(carSpeed);
         // console.log(carSpeedX);
         // console.log(carSpeedY);
         // carAng += 0.02;
     
-        carX += carSpeedX;
-        carY += carSpeedY;
+        this.x += this.speedX;
+        this.y += this.speedY;
     } // End of carMove
 
     this.draw = function() {
-        drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
+        drawBitmapCenteredWithRotation(carPic, this.x, this.y, this.ang);
     }
 }
 
