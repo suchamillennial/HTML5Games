@@ -15,6 +15,13 @@ function carClass() {
     this.speedY = 0;
     this.myCarPic; // Which picture to use 
 
+    // Add input movement properties
+    // variable to see if the key is being held down
+    this.keyHeld_Gas = false;
+    this.keyHeld_Reverse = false;
+    this.keyHeld_Left = false;
+    this.keyHeld_Right = false;
+
     this.reset = function(whichImage) {
         this.myCarPic = whichImage;
 
@@ -41,17 +48,17 @@ function carClass() {
         // Degrade speed each frame
         this.speed*= GROUNDSPEED_DECAY_MULT;
     
-        if(keyHeld_Gas){
+        if(this.keyHeld_Gas){
             this.speed += DRIVE_POWER;
         }
-        if(keyHeld_Reverse){
+        if(this.keyHeld_Reverse){
             this.speed -= REVERSE_POWER;
         }
         if(Math.abs(this.speed) > 0.5){
-            if(keyHeld_Right){
+            if(this.keyHeld_Right){
                 this.ang += TURN_RATE;
             }
-            if(keyHeld_Left){
+            if(this.keyHeld_Left){
                 this.ang -= TURN_RATE;
             }
         }
