@@ -71,6 +71,8 @@ function rowColToArrayIndex(col, row) {
 function drawTracks(){
     // console.log("Drawing Tracks");
     var arrayIndex =0;
+    var drawTileX = 0;
+    var drawTileY = 0;
     for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
         for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
 
@@ -78,9 +80,12 @@ function drawTracks(){
             var useImage;
 
             useImage = trackPics[tileKind];
-            canvasContext.drawImage(useImage,TRACK_W*eachCol, TRACK_H*eachRow);
+            canvasContext.drawImage(useImage,drawTileX, drawTileY);
+            drawTileX += TRACK_W;
             arrayIndex++;
         }
+        drawTileX = 0;
+        drawTileY += TRACK_H;
     }
     // for(let i = 0; i < TRACK_COUNT; i++){
     //     if(trackGrid[i]){
