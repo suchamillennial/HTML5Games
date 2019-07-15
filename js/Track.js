@@ -76,26 +76,28 @@ function drawTracks(){
             var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
 
             var tileKind = trackGrid[arrayIndex];
+            var useImage;
             switch(tileKind){
                 case TRACK_ROAD:
-                    canvasContext.drawImage(roadPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    useImage = roadPic;
                     break;
                 case TRACK_WALL:
-                    canvasContext.drawImage(wallPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    useImage = wallPic;
                     break;
                 
                 case TRACK_FLAG:
-                    canvasContext.drawImage(flagPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    useImage = flagPic;
                     break;
                 
                 case TRACK_FINISH:
-                    canvasContext.drawImage(finishPic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    useImage = finishPic;
                     break;
                 
                 case TRACK_TREE:
-                    canvasContext.drawImage(treePic,TRACK_W*eachCol, TRACK_H*eachRow);
+                    useImage = treePic;
                     break;
             }
+            canvasContext.drawImage(useImage,TRACK_W*eachCol, TRACK_H*eachRow);
         }
     }
     // for(let i = 0; i < TRACK_COUNT; i++){
