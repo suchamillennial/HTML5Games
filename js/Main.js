@@ -2,10 +2,11 @@
 // Set up canvas variables
 var canvas, canvasContext;
 
+// Create instance of car for player 1
 
+var blueCar = new carClass();
 
-
-carReset();
+blueCar.reset();
 
 
 
@@ -32,7 +33,7 @@ function imageLoadingDoneSoStartGame() {
     setupInput();
 
 
-    carReset();
+    blueCar.reset();
 }
 
 
@@ -43,7 +44,7 @@ function updateAll() {
 }
 
 function moveAll() {
-    carMove();
+    blueCar.move();
     carTrackHandling();
 }
 
@@ -53,7 +54,7 @@ function clearScreen() {
 
 function drawAll(){
     drawTracks();
-    drawCar();
+    blueCar.draw();
     
 }
 
