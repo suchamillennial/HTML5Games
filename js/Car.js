@@ -5,15 +5,15 @@ const TURN_RATE = .1;
 // Car shouldnt turn in place
 const MIN_SPEED_TO_TURN = 0.5;
 
-// Set up game object variables
-var carX = 0;
-var carY = 0;
-var carAng = 0;
-var carSpeed = 5;
-var carSpeedX = 0;
-var carSpeedY = 0;
-
-
+function carClass() {
+    // Set up game object variables
+    this.x = 0;
+    this.y = 0;
+    this.ang = 0;
+    this.speed = 5;
+    this.speedX = 0;
+    this.speedY = 0;
+}
 
 
 
