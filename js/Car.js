@@ -13,8 +13,11 @@ function carClass() {
     this.speed = 5;
     this.speedX = 0;
     this.speedY = 0;
+    this.myCarPic; // Which picture to use 
 
-    this.reset = function() {
+    this.reset = function(whichImage) {
+        this.myCarPic = whichImage;
+
         for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
             for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
     
@@ -67,7 +70,7 @@ function carClass() {
     } // End of carMove
 
     this.draw = function() {
-        drawBitmapCenteredWithRotation(carPic, this.x, this.y, this.ang);
+        drawBitmapCenteredWithRotation(this.myCarPic, this.x, this.y, this.ang);
     }
 }
 
