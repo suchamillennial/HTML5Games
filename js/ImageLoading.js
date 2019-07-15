@@ -1,4 +1,7 @@
 var carPic = document.createElement("img");
+
+var trackPics = [];
+
 var roadPic = document.createElement("img");
 var wallPic = document.createElement("img");
 var treePic = document.createElement("img");
@@ -22,14 +25,21 @@ function beginLoadingImage(imgVar, fileName) {
     imgVar.src = "images/" + fileName;
 }
 
+function loadImageForTrackCode(trackType, fileName) {
+    trackPics[trackType] = document.createElement('img');
+    beginLoadingImage(trackPics[trackType], fileName);
+
+}
+
 function loadImages() {
     var imageList = [
         {varName: carPic, fileName: "player1car.png"},
-        {varName: roadPic, fileName: "track_road.png"},
-        {varName: wallPic, fileName: "track_wall.png"},
-        {varName: treePic, fileName: "track_tree.png"},
-        {varName: flagPic, fileName: "track_flag.png"},
-        {varName: finishPic, fileName: "track_finish.png"}
+
+        {trackType: TRACK_ROAD, fileName: "track_road.png"},
+        {trackType: TRACK_WALL, fileName: "track_wall.png"},
+        {trackType: TRACK_FINISH, fileName: "track_finish.png"},
+        {trackType: TRACK_TREE, fileName: "track_tree.png"},
+        {trackType: TRACK_FLAG, fileName: "track_flag.png"}
     ];
 
     // Set the number of Images
@@ -37,6 +47,11 @@ function loadImages() {
 
     // Loop through images and call helper function
     for(var i = 0; i < imageList.length; i++){
-        beginLoadingImage(imageList[i].varName, imageList[i].fileName);
+        // Check if imagelist varName exists
+        if(imageList[i].varName!= undefined){
+            beginLoadingImage(imageList[i].varName, imageList[i].fileName);
+        }else{
+            loadImageForTrackCode(imageList[i].trackType, imageList[i].fileName);
+        }
     }
 }
