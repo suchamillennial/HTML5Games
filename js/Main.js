@@ -35,8 +35,8 @@ function imageLoadingDoneSoStartGame() {
     setupInput();
 
 
-    blueCar.reset();
-    greenCar.reset();
+    blueCar.reset(carPic);
+    greenCar.reset(otherCarPic);
 }
 
 
