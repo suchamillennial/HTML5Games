@@ -27,6 +27,7 @@ function carClass() {
                     this.ang = 0 * Math.PI/180.0;
                     this.x = (eachCol)*TRACK_W +(TRACK_W/2);
                     this.y = (eachRow)*TRACK_H +(TRACK_H/2);
+                    return;
                 }
             }
         }
