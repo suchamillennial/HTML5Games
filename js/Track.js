@@ -43,11 +43,11 @@ function isObstacleAtColRow(col, row){
 }
 
 // We don't know if a collision happened so it is handling
-function carTrackHandling() {
+function carTrackHandling(whichCar) {
 
     // Draw the car coordinates
-    var carTrackCol = Math.floor(carX / TRACK_W);
-    var carTrackRow = Math.floor(carY / TRACK_H);
+    var carTrackCol = Math.floor(whichCar.x / TRACK_W);
+    var carTrackRow = Math.floor(whichCar.y / TRACK_H);
     var trackIndexUndercar = rowColToArrayIndex(carTrackCol, carTrackRow);
 
     if(carTrackCol >= 0 && carTrackCol < TRACK_COLS &&
@@ -56,9 +56,9 @@ function carTrackHandling() {
         if(isObstacleAtColRow(carTrackCol,carTrackRow)){
             // console.log("colide");
             // Go backwards by the speed in order to not get stuck in the wall
-            carX -= Math.cos(carAng)*carSpeed;
-            carY -= Math.sin(carAng)*carSpeed;
-            carSpeed *= -0.5;
+            whichCar.x -= Math.cos(whichCar.ang)*whichCar.speed;
+            whichCar.y -= Math.sin(whichCar.ang)*whichCar.speed;
+            whichCar.speed *= -0.5;
         } // end of TRACK found
     } // end of valid col and row
 }

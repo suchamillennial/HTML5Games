@@ -45,7 +45,7 @@ function updateAll() {
 
 function moveAll() {
     blueCar.move();
-    carTrackHandling();
+    carTrackHandling(blueCar);
 }
 
 function clearScreen() {
