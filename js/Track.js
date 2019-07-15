@@ -70,16 +70,16 @@ function rowColToArrayIndex(col, row) {
 
 function drawTracks(){
     // console.log("Drawing Tracks");
+    var arrayIndex =0;
     for(let eachRow = 0; eachRow < TRACK_ROWS; eachRow++){
         for(let eachCol = 0; eachCol < TRACK_COLS; eachCol++){
-
-            var arrayIndex = rowColToArrayIndex(eachCol,eachRow);
 
             var tileKind = trackGrid[arrayIndex];
             var useImage;
 
             useImage = trackPics[tileKind];
             canvasContext.drawImage(useImage,TRACK_W*eachCol, TRACK_H*eachRow);
+            arrayIndex++;
         }
     }
     // for(let i = 0; i < TRACK_COUNT; i++){
