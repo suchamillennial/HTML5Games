@@ -22,30 +22,32 @@ function setupInput() {
 
 }
 
-function keySet (setTo) {
+function keySet (whichCar, setTo, evt) {
 
     switch(evt.keyCode){
-        case KEY_LEFT_ARROW: 
-            keyHeld_Left = setTo;
+        case whichCar.controlKeyLeft: 
+            whichCar.keyHeld_Left = setTo;
             break;
-        case KEY_RIGHT_ARROW: 
-            keyHeld_Right = setTo;
+        case whichCar.controlKeyRight: 
+            whichCar.keyHeld_Right = setTo;
             break;
-        case KEY_UP_ARROW: 
-            keyHeld_Gas = setTo;
+        case whichCar.controlKeyUp: 
+            whichCar.keyHeld_Gas = setTo;
             break;
-        case KEY_DOWN_ARROW: 
-            keyHeld_Reverse = setTo;
+        case whichCar.controlKeyDown: 
+            whichCar.keyHeld_Reverse = setTo;
             break;
     }
 }
 
 function keyPressed(evt){
-    keySet(true);
+    keySet(blueCar,true, evt);
+    keySet(greenCar,true, evt);
 }
 
 function keyReleased(evt){
-    keySet(false);
+    keySet(blueCar, false, evt);
+    keySet(greenCar, false, evt);
 }
 
 // Method for getting mouse data that is called when the mouse is moved
