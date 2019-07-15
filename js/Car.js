@@ -12,6 +12,8 @@ const GROUNDSPEED_DECAY_MULT = 0.98;
 const DRIVE_POWER = 0.5;
 const REVERSE_POWER = 0.2;
 const TURN_RATE = .1;
+// Car shouldnt turn in place
+const MIN_SPEED_TO_TURN = 0.5;
 
 
 
@@ -44,11 +46,13 @@ function carMove() {
     if(keyHeld_Reverse){
         carSpeed -= REVERSE_POWER;
     }
-    if(keyHeld_Right){
-        carAng += TURN_RATE;
-    }
-    if(keyHeld_Left){
-        carAng -= TURN_RATE;
+    if(Math.abs(carSpeed) > 0.5){
+        if(keyHeld_Right){
+            carAng += TURN_RATE;
+        }
+        if(keyHeld_Left){
+            carAng -= TURN_RATE;
+        }
     }
     carSpeedX = Math.cos(carAng)*carSpeed;
     carSpeedY = Math.sin(carAng)*carSpeed;
