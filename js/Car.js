@@ -61,6 +61,9 @@ function carClass() {
     
         this.x += this.speedX;
         this.y += this.speedY;
+
+        carTrackHandling(this);
+
     } // End of carMove
 
     this.draw = function() {
