@@ -36,7 +36,7 @@ function isObstacleAtColRow(col, row){
         
     var trackIndexUnderCoord = rowColToArrayIndex(col, row);
 
-    return trackGrid[trackIndexUnderCoord] == TRACK_WALL;
+    return trackGrid[trackIndexUnderCoord] == TRACK_WALL || trackGrid[trackIndexUnderCoord] == TRACK_FLAG;
     }else{
         return false;
     }
